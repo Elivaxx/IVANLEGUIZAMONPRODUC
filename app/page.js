@@ -35,6 +35,14 @@ export default function Home() {
             from { opacity: 0; transform: translateX(-30px); }
             to { opacity: 1; transform: translateX(0); }
           }
+          @keyframes slideLeft {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+          @keyframes slideRight {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
 
           /* Navigation */
           nav {
@@ -131,7 +139,7 @@ export default function Home() {
           }
           .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
             padding-top: 2rem;
@@ -194,9 +202,10 @@ export default function Home() {
             box-shadow: 0 20px 40px rgba(26, 77, 92, 0.15);
             border-color: rgba(26, 77, 92, 0.3);
           }
-          .project-image {
+
+          .project-image-container {
             width: 100%;
-            height: 200px;
+            height: 250px;
             background: linear-gradient(135deg, var(--petrol) 0%, var(--charcoal) 100%);
             display: flex;
             align-items: center;
@@ -206,7 +215,49 @@ export default function Home() {
             font-weight: 700;
             text-align: center;
             padding: 1rem;
+            position: relative;
+            overflow: hidden;
           }
+
+          .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: slideLeft 0.5s ease-out;
+          }
+
+          .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(245, 241, 232, 0.9);
+            color: var(--petrol);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+          }
+
+          .carousel-nav:hover {
+            background: var(--cream);
+            transform: translateY(-50%) scale(1.1);
+          }
+
+          .carousel-nav.prev {
+            left: 10px;
+          }
+
+          .carousel-nav.next {
+            right: 10px;
+          }
+
           .project-info {
             padding: 2rem;
           }
@@ -219,6 +270,7 @@ export default function Home() {
             font-size: 0.9rem;
             color: var(--gray);
             margin-bottom: 1rem;
+            line-height: 1.6;
           }
           .project-tag {
             display: inline-block;
@@ -282,6 +334,7 @@ export default function Home() {
             .section-title { font-size: 1.8rem; }
             .nav-links { display: none; }
             .projects-grid { grid-template-columns: 1fr; }
+            .project-image-container { height: 200px; }
           }
         `}</style>
       </head>
@@ -301,20 +354,20 @@ export default function Home() {
           <div className="hero-content">
             <h1>Técnico en Producción Audiovisual</h1>
             <p className="hero-subtitle">Madrid, España • elivaclips@gmail.com</p>
-            <p>Técnico especializado en Producción Audiovisual con experiencia real en rodajes de ficción, bloqueo de localizaciones y apoyo de producción en series de televisión. Egresado del Ciclo Superior de Producción Audiovisual y Espectáculos (Planeta FP) con formación en todas las áreas del proceso audiovisual: preproducción, rodaje y postproducción.</p>
+            <p>Técnico especializado en Producción Audiovisual y Espectáculos con experiencia real en rodajes de ficción, producciones de Cablevisión, bloqueo de localizaciones y apoyo en producciones de televisión. Egresado del Ciclo Superior de Producción Audiovisual y Espectáculos (Planeta FP) con formación integral en preproducción, rodaje y postproducción audiovisual.</p>
 
             <div className="about-grid">
               <div className="about-item">
-                <h3>Experiencia</h3>
-                <p>Blocker y apoyo de producción en la serie <strong>Anatomía de un Instante</strong> (DLO Producciones). Experiencia en ficción, gestión de rodajes y coordinación de equipos.</p>
+                <h3>Experiencia Principal</h3>
+                <p><strong>Bloquer y Apoyo de Producción</strong> en la serie <strong>Anatomía de un Instante</strong> (Movistar+, DLO Producciones). <strong>Jefe de Producción</strong> en cortometraje de ficción. Director de Cámara/Realizador. Experiencia en producciones de <strong>Cablevisión</strong>. Gestión de rodajes, coordinación de equipos y bloqueo de localizaciones.</p>
               </div>
               <div className="about-item">
                 <h3>Habilidades Técnicas</h3>
-                <p><strong>Software:</strong> Adobe Premiere Pro (Avanzado), After Effects (Avanzado), DaVinci Resolve, Microsoft Office</p>
+                <p><strong>Software:</strong> Adobe Premiere Pro (Avanzado), After Effects (Avanzado), DaVinci Resolve (Intermedio), Microsoft Office. <strong>Áreas:</strong> Producción, Postproducción, Espectáculos, Marketing Audiovisual.</p>
               </div>
               <div className="about-item">
                 <h3>Idiomas</h3>
-                <p><strong>Español</strong> (Nativo), <strong>Guaraní</strong> (Nativo), <strong>Inglés</strong> (B1)</p>
+                <p><strong>Español</strong> (Nativo), <strong>Guaraní</strong> (Nativo), <strong>Inglés</strong> (B1). Capacidad de comunicación en equipos multiculturales y coordinación internacional.</p>
               </div>
             </div>
           </div>
@@ -325,82 +378,100 @@ export default function Home() {
             <h2 className="section-title">Proyectos</h2>
             <div className="projects-grid">
               <div className="project-card">
-                <div className="project-image">📽️</div>
+                <div className="project-image-container">
+                  <span>📽️</span>
+                </div>
                 <div className="project-info">
-                  <h3>Graduación FP</h3>
-                  <p>Producción audiovisual del evento de fin de ciclo</p>
+                  <h3>Graduación Planeta FP</h3>
+                  <p>Producción audiovisual completa del evento de fin de ciclo. Coordinación de equipos técnicos, captura y edición de contenido.</p>
                   <span className="project-tag">Evento</span>
                 </div>
               </div>
 
               <div className="project-card">
-                <div className="project-image">🎬</div>
+                <div className="project-image-container">
+                  <span>🎬</span>
+                </div>
                 <div className="project-info">
                   <h3>Concierto Gabriel Piattore</h3>
-                  <p>Director de cámara en rodaje de concierto musical</p>
+                  <p>Director de Cámara/Realizador en rodaje de concierto musical en vivo. Dirección de ángulos, movimientos de cámara y gestión técnica.</p>
                   <span className="project-tag">Música</span>
                 </div>
               </div>
 
               <div className="project-card">
-                <div className="project-image">🎥</div>
+                <div className="project-image-container">
+                  <span>🎥</span>
+                </div>
                 <div className="project-info">
                   <h3>Cortometraje "Ser un buen macarra"</h3>
-                  <p>Jefe de producción en rodaje de ficción</p>
+                  <p>Jefe de Producción en rodaje de ficción. Coordinación de equipos, gestión de localizaciones y seguimiento de producción.</p>
                   <span className="project-tag">Ficción</span>
                 </div>
               </div>
 
               <div className="project-card">
-                <div className="project-image">🎉</div>
+                <div className="project-image-container">
+                  <span>🎉</span>
+                </div>
                 <div className="project-info">
                   <h3>Fiesta WAV Azul</h3>
-                  <p>Producción audiovisual para marketing y eventos</p>
-                  <span className="project-tag">Marketing</span>
+                  <p>Producción audiovisual de espectáculo y marketing. Captura de evento, edición de contenido para redes y promoción digital.</p>
+                  <span className="project-tag">Espectáculo</span>
                 </div>
               </div>
 
               <div className="project-card">
-                <div className="project-image">📱</div>
+                <div className="project-image-container">
+                  <span>📱</span>
+                </div>
                 <div className="project-info">
-                  <h3>G&G - Gestión de Contenido</h3>
-                  <p>Producción y gestión de contenido audiovisual para redes</p>
-                  <span className="project-tag">Redes</span>
+                  <h3>G&G - Producción Audiovisual</h3>
+                  <p>Jefe de Producción en organización de eventos deportivos y entretenimiento. Producción y gestión de contenido audiovisual para redes y marketing.</p>
+                  <span className="project-tag">Espectáculo</span>
                 </div>
               </div>
 
               <div className="project-card">
-                <div className="project-image">📺</div>
+                <div className="project-image-container">
+                  <span>📺</span>
+                </div>
                 <div className="project-info">
-                  <h3>Serie Movistar - "Anatomía de un Instante"</h3>
-                  <p>Bloquer y apoyo de producción en serie de ficción</p>
+                  <h3>Serie Movistar+ "Anatomía de un Instante"</h3>
+                  <p>Bloquer y Apoyo de Producción en serie de ficción para televisión. Participación en todas las fases de producción: preproducción, rodaje y coordinación.</p>
                   <span className="project-tag">Ficción</span>
                 </div>
               </div>
 
               <div className="project-card">
-                <div className="project-image">🎙️</div>
+                <div className="project-image-container">
+                  <span>🎙️</span>
+                </div>
                 <div className="project-info">
-                  <h3>Programa Radiofónico</h3>
-                  <p>Productor audiovisual en proyecto radiofónico</p>
+                  <h3>Programa Radiofónico "Radiografía"</h3>
+                  <p>Productor Audiovisual en proyecto radiofónico. Gestión técnica, producción de contenido y coordinación de emisión.</p>
                   <span className="project-tag">Radio</span>
                 </div>
               </div>
 
               <div className="project-card">
-                <div className="project-image">🏢</div>
+                <div className="project-image-container">
+                  <span>🏢</span>
+                </div>
                 <div className="project-info">
-                  <h3>Visita Atresmedia Radio</h3>
-                  <p>Coordinación de producción en visita corporativa</p>
+                  <h3>Atresmedia Radio - Experiencia Corporativa</h3>
+                  <p>Coordinación de producción en visitas a instalaciones de Atresmedia Radio. Experiencia en entorno corporativo de medios y radio.</p>
                   <span className="project-tag">Corporativo</span>
                 </div>
               </div>
 
               <div className="project-card">
-                <div className="project-image">🚀</div>
+                <div className="project-image-container">
+                  <span>🚀</span>
+                </div>
                 <div className="project-info">
                   <h3>FE 2025 - Ungravity</h3>
-                  <p>Ayudante de producción y cámara en proyecto web</p>
+                  <p>Ayudante de Producción y Cámara en proyecto audiovisual web. Participación en captura, rodaje y postproducción de contenido digital.</p>
                   <span className="project-tag">Web</span>
                 </div>
               </div>
@@ -411,13 +482,13 @@ export default function Home() {
         <section className="contact" id="contacto">
           <div className="contact-content">
             <h2>Conectemos</h2>
-            <p>¿Tienes un proyecto en mente? Contactame para hablar sobre oportunidades de colaboración.</p>
+            <p>¿Tienes un proyecto audiovisual en mente? Escríbeme para hablar sobre nuevas oportunidades de colaboración en producción, postproducción o espectáculos.</p>
             <a href="mailto:elivaclips@gmail.com" className="contact-link">ENVIAR EMAIL</a>
           </div>
         </section>
 
         <footer>
-          <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual.</p>
+          <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos.</p>
         </footer>
       </body>
     </html>
