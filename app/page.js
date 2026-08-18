@@ -16,7 +16,7 @@ export default function Home() {
         body {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
           color: var(--charcoal);
-          background: linear-gradient(180deg, var(--cream) 0%, white 100%);
+          background: linear-gradient(180deg, #faf8f4 0%, #f6f4f0 20%, #f2f0ec 40%, #efeced 60%, #ebead7 80%, #e8e6e2 100%);
           line-height: 1.6;
           overflow-x: hidden;
           min-height: 100vh;
@@ -39,8 +39,8 @@ export default function Home() {
           to { opacity: 1; transform: translateX(0); }
         }
         @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
+          0%, 100% { transform: translate3d(0, 0px, 0); }
+          50% { transform: translate3d(0, -20px, 0); }
         }
         @keyframes glow {
           0%, 100% { box-shadow: 0 0 30px rgba(26, 77, 92, 0.3), inset 0 0 20px rgba(26, 77, 92, 0.1); }
@@ -180,6 +180,7 @@ export default function Home() {
           border-radius: 20px;
           box-shadow: 0 20px 60px rgba(26, 77, 92, 0.2);
           animation: float 3s ease-in-out infinite;
+          will-change: transform;
         }
 
         .skills-section {
@@ -195,9 +196,9 @@ export default function Home() {
         }
         .skill-category {
           padding: 2rem;
-          background: rgba(255, 255, 255, 0.4);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(26, 77, 92, 0.1);
+          background: rgba(255, 255, 255, 0.25);
+          backdrop-filter: blur(25px);
+          border: 1px solid rgba(26, 77, 92, 0.12);
           border-radius: 16px;
           transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -226,7 +227,7 @@ export default function Home() {
 
         .experiences {
           padding: 6rem 2rem;
-          background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, white 100%);
+          background: linear-gradient(180deg, #f2f0ec 0%, #efeced 100%);
           position: relative;
         }
         .experiences::before {
@@ -259,12 +260,12 @@ export default function Home() {
           gap: 3rem;
         }
         .experience-card {
-          background: rgba(255, 255, 255, 0.5);
-          backdrop-filter: blur(10px);
+          background: rgba(255, 255, 255, 0.25);
+          backdrop-filter: blur(25px);
           border-radius: 20px;
           overflow: hidden;
           transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-          border: 1px solid rgba(26, 77, 92, 0.1);
+          border: 1px solid rgba(26, 77, 92, 0.12);
           animation: fadeInUp 0.6s ease-out backwards;
           box-shadow: 0 10px 30px rgba(26, 77, 92, 0.08), inset 0 1px 0 rgba(255,255,255,0.3);
           position: relative;
@@ -294,6 +295,9 @@ export default function Home() {
         .experience-card:nth-child(7) { animation-delay: 0.4s; }
         .experience-card:nth-child(8) { animation-delay: 0.45s; }
         .experience-card:nth-child(9) { animation-delay: 0.5s; }
+        .experience-card {
+          will-change: transform;
+        }
         .experience-card:hover {
           transform: translateY(-12px);
           background: rgba(255, 255, 255, 0.8);
@@ -441,6 +445,32 @@ export default function Home() {
           transform: translateY(-4px);
           box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
         }
+        .contact-buttons {
+          display: flex;
+          gap: 1.5rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 1.5rem;
+        }
+        .cv-link {
+          display: inline-block;
+          background: rgba(245, 241, 232, 0.15);
+          border: 2px solid var(--cream);
+          color: var(--cream);
+          padding: 1rem 2.5rem;
+          text-decoration: none;
+          font-weight: 800;
+          border-radius: 50px;
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          letter-spacing: 0.5px;
+          font-size: 0.95rem;
+          backdrop-filter: blur(10px);
+        }
+        .cv-link:hover {
+          background: rgba(245, 241, 232, 0.3);
+          transform: translateY(-4px);
+          box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
 
         footer {
           background: var(--charcoal);
@@ -487,6 +517,13 @@ export default function Home() {
           .carousel-container { height: 200px; }
           .experience-info { padding: 1.5rem; }
           .contact h2 { font-size: 1.8rem; }
+          .contact-buttons {
+            flex-direction: column;
+            gap: 1rem;
+          }
+          .contact-link, .cv-link {
+            width: 100%;
+          }
         }
       `}</style>
 
@@ -694,7 +731,10 @@ export default function Home() {
         <div className="contact-content scroll-reveal">
           <h2>Conectemos</h2>
           <p>¿Tienes un proyecto audiovisual en mente? Escríbeme para hablar sobre nuevas oportunidades de colaboración en producción, postproducción o espectáculos.</p>
-          <a href="mailto:elivaclips@gmail.com" className="contact-link">ENVIAR EMAIL</a>
+          <div className="contact-buttons">
+            <a href="mailto:elivaclips@gmail.com" className="contact-link">ENVIAR EMAIL</a>
+            <a href="/CV_Ivan_Leguizamon.pdf" download className="cv-link">DESCARGAR CV</a>
+          </div>
         </div>
       </section>
 
