@@ -379,7 +379,7 @@ export default function Home() {
                 <img id="carousel-img-2" className="carousel-image" src="/projects/concierto-gabriel-piattore/img-1-opt.jpg" alt="Concierto Gabriel Piattore" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(2)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(2)}>›</button>
-                <div className="carousel-counter"><span id="counter-2">1</span>/5</div>
+                <div className="carousel-counter"><span id="counter-2">1</span>/3</div>
               </div>
               <div className="project-info">
                 <h3>Concierto Gabriel Piattore</h3>
@@ -390,7 +390,10 @@ export default function Home() {
 
             <div className="project-card">
               <div className="carousel-container">
-                <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🎥</span>
+                <img id="carousel-img-3" className="carousel-image" src="/projects/cortometraje-ser-buen-macarra/img-1-opt.jpg" alt="Cortometraje Ser un buen macarra" />
+                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(3)}>‹</button>
+                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(3)}>›</button>
+                <div className="carousel-counter"><span id="counter-3">1</span>/4</div>
               </div>
               <div className="project-info">
                 <h3>Cortometraje "Ser un buen macarra"</h3>
@@ -498,6 +501,15 @@ export default function Home() {
               '/projects/concierto-gabriel-piattore/img-1-opt.jpg',
               '/projects/concierto-gabriel-piattore/img-2-opt.jpg',
               '/projects/concierto-gabriel-piattore/img-3-opt.jpg'
+            ]
+          },
+          3: {
+            current: 0,
+            images: [
+              '/projects/cortometraje-ser-buen-macarra/img-1-opt.jpg',
+              '/projects/cortometraje-ser-buen-macarra/img-2-opt.jpg',
+              '/projects/cortometraje-ser-buen-macarra/img-3-opt.jpg',
+              '/projects/cortometraje-ser-buen-macarra/img-4-opt.jpg'
             ]
           }
         };
