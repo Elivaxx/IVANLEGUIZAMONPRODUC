@@ -16,9 +16,10 @@ export default function Home() {
         body {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
           color: var(--charcoal);
-          background: var(--cream);
+          background: linear-gradient(180deg, var(--cream) 0%, white 100%);
           line-height: 1.6;
           overflow-x: hidden;
+          min-height: 100vh;
         }
 
         @keyframes fadeInUp {
@@ -42,48 +43,67 @@ export default function Home() {
           50% { transform: translateY(-20px); }
         }
         @keyframes glow {
-          0%, 100% { box-shadow: 0 0 20px rgba(26, 77, 92, 0.3); }
-          50% { box-shadow: 0 0 40px rgba(26, 77, 92, 0.5); }
+          0%, 100% { box-shadow: 0 0 30px rgba(26, 77, 92, 0.3), inset 0 0 20px rgba(26, 77, 92, 0.1); }
+          50% { box-shadow: 0 0 50px rgba(26, 77, 92, 0.5), inset 0 0 30px rgba(26, 77, 92, 0.15); }
+        }
+        @keyframes shimmer {
+          0%, 100% { opacity: 0.1; }
+          50% { opacity: 0.3; }
+        }
+
+        /* Decorative elements */
+        .bg-decoration {
+          position: fixed;
+          pointer-events: none;
+          opacity: 0.05;
+          z-index: 0;
+        }
+        .decoration-circle {
+          position: absolute;
+          border-radius: 50%;
+          border: 2px solid var(--petrol);
+          animation: shimmer 4s ease-in-out infinite;
         }
 
         nav {
           position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
+          top: 1.5rem;
+          left: 50%;
+          transform: translateX(-50%);
           z-index: 1000;
           background: rgba(245, 241, 232, 0.7);
           backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(26, 77, 92, 0.1);
-          padding: 1rem 0;
+          border: 1px solid rgba(26, 77, 92, 0.2);
+          padding: 0.8rem 2.5rem;
+          border-radius: 50px;
           animation: fadeIn 0.6s ease-out;
+          box-shadow: 0 8px 32px rgba(26, 77, 92, 0.1);
         }
         .nav-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 2rem;
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           align-items: center;
+          gap: 3rem;
         }
         .logo {
-          font-size: 1.5rem;
+          font-size: 1rem;
           font-weight: 800;
-          letter-spacing: -1px;
+          letter-spacing: 1px;
           background: linear-gradient(135deg, var(--petrol) 0%, var(--charcoal) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+          white-space: nowrap;
         }
         .nav-links {
           display: flex;
-          gap: 3rem;
+          gap: 2.5rem;
           list-style: none;
         }
         .nav-links a {
           text-decoration: none;
           color: var(--charcoal);
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           font-weight: 600;
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
@@ -94,13 +114,26 @@ export default function Home() {
         }
 
         .hero {
-          margin-top: 80px;
+          margin-top: 120px;
           padding: 6rem 2rem;
-          background: linear-gradient(135deg, var(--cream) 0%, rgba(26, 77, 92, 0.08) 100%);
+          background: linear-gradient(135deg, var(--cream) 0%, rgba(26, 77, 92, 0.04) 100%);
           min-height: 70vh;
           display: flex;
           align-items: center;
           justify-content: center;
+          position: relative;
+          overflow: hidden;
+        }
+        .hero::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -20%;
+          width: 600px;
+          height: 600px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(26, 77, 92, 0.05) 0%, transparent 70%);
+          animation: float 6s ease-in-out infinite;
         }
         .hero-content {
           max-width: 1200px;
@@ -110,6 +143,8 @@ export default function Home() {
           gap: 4rem;
           align-items: center;
           animation: fadeInUp 0.8s ease-out;
+          position: relative;
+          z-index: 1;
         }
         .hero-text h1 {
           font-size: 3.5rem;
@@ -147,50 +182,68 @@ export default function Home() {
           animation: float 3s ease-in-out infinite;
         }
 
-        .about-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 2rem;
-          margin-top: 3rem;
+        .skills-section {
+          margin-top: 4rem;
           padding-top: 3rem;
           border-top: 1px solid rgba(26, 77, 92, 0.1);
         }
-        .about-card {
-          padding: 2.5rem;
+        .skills-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .skill-category {
+          padding: 2rem;
           background: rgba(255, 255, 255, 0.4);
           backdrop-filter: blur(10px);
           border: 1px solid rgba(26, 77, 92, 0.1);
           border-radius: 16px;
           transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .about-card:hover {
+        .skill-category:hover {
           transform: translateY(-8px);
           background: rgba(255, 255, 255, 0.7);
           box-shadow: 0 20px 40px rgba(26, 77, 92, 0.1);
-          border-color: rgba(26, 77, 92, 0.2);
         }
-        .about-card h3 {
-          font-size: 0.9rem;
+        .skill-category h3 {
+          font-size: 0.95rem;
           text-transform: uppercase;
           letter-spacing: 1.5px;
           color: var(--petrol);
           margin-bottom: 1rem;
           font-weight: 800;
         }
-        .about-card p {
+        .skill-category ul {
+          list-style: none;
+        }
+        .skill-category li {
           font-size: 0.95rem;
           color: var(--charcoal);
-          line-height: 1.7;
+          line-height: 1.8;
           font-weight: 500;
         }
 
-        .projects {
+        .experiences {
           padding: 6rem 2rem;
-          background: white;
+          background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, white 100%);
+          position: relative;
+        }
+        .experiences::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 200px;
+          background: linear-gradient(135deg, rgba(26, 77, 92, 0.02) 0%, transparent 100%);
+          pointer-events: none;
         }
         .container {
           max-width: 1200px;
           margin: 0 auto;
+          position: relative;
+          z-index: 1;
         }
         .section-title {
           font-size: 2.8rem;
@@ -200,33 +253,57 @@ export default function Home() {
           font-weight: 800;
           letter-spacing: -1px;
         }
-        .projects-grid {
+        .experiences-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
           gap: 3rem;
         }
-        .project-card {
-          background: white;
+        .experience-card {
+          background: rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(10px);
           border-radius: 20px;
           overflow: hidden;
           transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-          border: 1px solid rgba(26, 77, 92, 0.08);
+          border: 1px solid rgba(26, 77, 92, 0.1);
           animation: fadeInUp 0.6s ease-out backwards;
-          box-shadow: 0 10px 30px rgba(26, 77, 92, 0.08);
+          box-shadow: 0 10px 30px rgba(26, 77, 92, 0.08), inset 0 1px 0 rgba(255,255,255,0.3);
+          position: relative;
+          overflow: visible;
         }
-        .project-card:nth-child(1) { animation-delay: 0.1s; }
-        .project-card:nth-child(2) { animation-delay: 0.15s; }
-        .project-card:nth-child(3) { animation-delay: 0.2s; }
-        .project-card:nth-child(4) { animation-delay: 0.25s; }
-        .project-card:nth-child(5) { animation-delay: 0.3s; }
-        .project-card:nth-child(6) { animation-delay: 0.35s; }
-        .project-card:nth-child(7) { animation-delay: 0.4s; }
-        .project-card:nth-child(8) { animation-delay: 0.45s; }
-        .project-card:nth-child(9) { animation-delay: 0.5s; }
-        .project-card:hover {
+        .experience-card::before {
+          content: '';
+          position: absolute;
+          top: -1px;
+          left: -1px;
+          right: -1px;
+          bottom: -1px;
+          background: radial-gradient(circle at 30% 30%, rgba(26, 77, 92, 0.2) 0%, transparent 50%),
+                      radial-gradient(circle at 70% 70%, rgba(26, 77, 92, 0.1) 0%, transparent 50%);
+          border-radius: 20px;
+          opacity: 0;
+          transition: opacity 0.4s ease-out;
+          pointer-events: none;
+          z-index: -1;
+        }
+        .experience-card:nth-child(1) { animation-delay: 0.1s; }
+        .experience-card:nth-child(2) { animation-delay: 0.15s; }
+        .experience-card:nth-child(3) { animation-delay: 0.2s; }
+        .experience-card:nth-child(4) { animation-delay: 0.25s; }
+        .experience-card:nth-child(5) { animation-delay: 0.3s; }
+        .experience-card:nth-child(6) { animation-delay: 0.35s; }
+        .experience-card:nth-child(7) { animation-delay: 0.4s; }
+        .experience-card:nth-child(8) { animation-delay: 0.45s; }
+        .experience-card:nth-child(9) { animation-delay: 0.5s; }
+        .experience-card:hover {
           transform: translateY(-12px);
-          box-shadow: 0 30px 60px rgba(26, 77, 92, 0.15);
+          background: rgba(255, 255, 255, 0.8);
           border-color: rgba(26, 77, 92, 0.2);
+          box-shadow: 0 30px 60px rgba(26, 77, 92, 0.15),
+                      0 0 40px rgba(26, 77, 92, 0.15),
+                      inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+        .experience-card:hover::before {
+          opacity: 1;
         }
 
         .carousel-container {
@@ -294,24 +371,24 @@ export default function Home() {
           letter-spacing: 0.5px;
         }
 
-        .project-info {
+        .experience-info {
           padding: 2.5rem;
         }
-        .project-info h3 {
+        .experience-info h3 {
           font-size: 1.3rem;
           margin-bottom: 0.8rem;
           color: var(--charcoal);
           font-weight: 800;
           letter-spacing: -0.5px;
         }
-        .project-info p {
+        .experience-info p {
           font-size: 0.95rem;
           color: var(--gray);
           margin-bottom: 1.5rem;
           line-height: 1.6;
           font-weight: 500;
         }
-        .project-tag {
+        .experience-tag {
           display: inline-block;
           background: linear-gradient(135deg, rgba(26, 77, 92, 0.1) 0%, rgba(26, 77, 92, 0.05) 100%);
           color: var(--petrol);
@@ -386,28 +463,39 @@ export default function Home() {
         }
 
         @media (max-width: 768px) {
+          nav {
+            top: 1rem;
+            padding: 0.6rem 1.5rem;
+          }
+          .logo {
+            font-size: 0.9rem;
+          }
+          .nav-links {
+            display: none;
+          }
           .hero-content {
             grid-template-columns: 1fr;
             gap: 2rem;
+            margin-top: 2rem;
           }
           .hero-text h1 { font-size: 2.2rem; }
+          .skills-grid {
+            grid-template-columns: 1fr;
+          }
           .section-title { font-size: 1.8rem; margin-bottom: 2rem; }
-          .nav-links { display: none; }
-          .projects-grid { grid-template-columns: 1fr; }
+          .experiences-grid { grid-template-columns: 1fr; }
           .carousel-container { height: 200px; }
-          .nav-links { gap: 1.5rem; font-size: 0.85rem; }
-          .about-card { padding: 1.5rem; }
-          .project-info { padding: 1.5rem; }
+          .experience-info { padding: 1.5rem; }
           .contact h2 { font-size: 1.8rem; }
         }
       `}</style>
 
       <nav>
         <div className="nav-container">
-          <div className="logo">IVÁN</div>
+          <div className="logo">IVÁN LEGUIZAMÓN • PRODUCTOR</div>
           <ul className="nav-links">
             <li><a href="#about">Sobre mí</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#experiencias">Experiencias</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </div>
@@ -418,20 +506,47 @@ export default function Home() {
           <div className="hero-text scroll-reveal">
             <h1>Técnico en Producción Audiovisual</h1>
             <p className="hero-subtitle">Madrid, España</p>
-            <p>Especializado en producción audiovisual y espectáculos con experiencia en rodajes de ficción, producciones televisivas y gestión de localizaciones. Egresado del Ciclo Superior de Producción Audiovisual y Espectáculos con expertise en preproducción, rodaje y postproducción.</p>
+            <p>Especializado en producción audiovisual y espectáculos con experiencia integral en rodajes de ficción, producciones televisivas y gestión de localizaciones. Egresado del Ciclo Superior de Producción Audiovisual y Espectáculos con expertise avanzado en preproducción, rodaje y postproducción.</p>
 
-            <div className="about-grid">
-              <div className="about-card scroll-reveal">
-                <h3>Experiencia</h3>
-                <p>Bloquer y Apoyo de Producción en <strong>Anatomía de un Instante</strong> (Movistar+). Jefe de Producción en cortometrajes. Director de Cámara/Realizador.</p>
-              </div>
-              <div className="about-card scroll-reveal">
-                <h3>Habilidades</h3>
-                <p><strong>Adobe Premiere</strong> (Avanzado), <strong>After Effects</strong> (Avanzado), <strong>DaVinci Resolve</strong> (Intermedio). Producción, Postproducción, Espectáculos.</p>
-              </div>
-              <div className="about-card scroll-reveal">
-                <h3>Idiomas</h3>
-                <p><strong>Español</strong> (Nativo), <strong>Guaraní</strong> (Nativo), <strong>Inglés</strong> (B1). Comunicación multicultural.</p>
+            <div className="skills-section">
+              <h3 style={{fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--petrol)', marginBottom: '1.5rem', fontWeight: '800'}}>Habilidades Personales</h3>
+              <div className="skills-grid">
+                <div className="skill-category">
+                  <h3>Bajo Presión</h3>
+                  <ul>
+                    <li>• Búsqueda ágil de soluciones</li>
+                    <li>• Toma de decisiones rápida</li>
+                    <li>• Calma y compostura</li>
+                    <li>• Cautela y prevención</li>
+                  </ul>
+                </div>
+                <div className="skill-category">
+                  <h3>Profesionales</h3>
+                  <ul>
+                    <li>• Puntualidad extrema</li>
+                    <li>• Disponibilidad flexible</li>
+                    <li>• Actitud colaborativa</li>
+                    <li>• Compromiso con calidad</li>
+                  </ul>
+                </div>
+                <div className="skill-category">
+                  <h3>Software Producción</h3>
+                  <ul>
+                    <li>• Adobe Premiere (Avanzado)</li>
+                    <li>• After Effects (Avanzado)</li>
+                    <li>• Adobe Audition (Avanzado)</li>
+                    <li>• Photoshop (Intermedio)</li>
+                  </ul>
+                </div>
+                <div className="skill-category">
+                  <h3>Producción & IA</h3>
+                  <ul>
+                    <li>• Gestión preproducción</li>
+                    <li>• Coordinación en rodaje</li>
+                    <li>• Generación video con IA</li>
+                    <li>• Restauración & Mejora</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -442,133 +557,133 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="projects" id="proyectos">
+      <section className="experiences" id="experiencias">
         <div className="container">
-          <h2 className="section-title scroll-reveal">Proyectos</h2>
-          <div className="projects-grid">
-            <div className="project-card">
+          <h2 className="section-title scroll-reveal">Experiencias</h2>
+          <div className="experiences-grid">
+            <div className="experience-card">
               <div className="carousel-container">
                 <img id="carousel-img-1" className="carousel-image" src="/projects/graduacion-fp/img-1-opt.jpg" alt="Graduación Planeta FP" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(1)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(1)}>›</button>
                 <div className="carousel-counter"><span id="counter-1">1</span>/5</div>
               </div>
-              <div className="project-info">
+              <div className="experience-info">
                 <h3>Graduación Planeta FP</h3>
-                <p>Producción audiovisual completa del evento de fin de ciclo. Coordinación de equipos técnicos, captura y edición de contenido.</p>
-                <span className="project-tag">Evento</span>
+                <p>Ciclo Superior de Producción Audiovisual y su Producción para TV y Eventos. Coordinación de equipo técnico, captura y edición de contenido audiovisual.</p>
+                <span className="experience-tag">Evento</span>
               </div>
             </div>
 
-            <div className="project-card">
+            <div className="experience-card">
               <div className="carousel-container">
                 <img id="carousel-img-2" className="carousel-image" src="/projects/concierto-gabriel-piattore/img-1-opt.jpg" alt="Concierto Gabriel Piattore" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(2)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(2)}>›</button>
                 <div className="carousel-counter"><span id="counter-2">1</span>/3</div>
               </div>
-              <div className="project-info">
+              <div className="experience-info">
                 <h3>Concierto Gabriel Piattore</h3>
-                <p>Director de Cámara/Realizador en rodaje de concierto musical en vivo. Dirección de ángulos y movimientos de cámara.</p>
-                <span className="project-tag">Música</span>
+                <p>Director de Cámara en concierto musical en vivo. Dirección de ángulos de cámara, movimientos de realización y gestión técnica en rodaje.</p>
+                <span className="experience-tag">Música</span>
               </div>
             </div>
 
-            <div className="project-card">
+            <div className="experience-card">
               <div className="carousel-container">
                 <img id="carousel-img-3" className="carousel-image" src="/projects/cortometraje-ser-buen-macarra/img-1-opt.jpg" alt="Cortometraje Ser un buen macarra" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(3)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(3)}>›</button>
                 <div className="carousel-counter"><span id="counter-3">1</span>/4</div>
               </div>
-              <div className="project-info">
+              <div className="experience-info">
                 <h3>Cortometraje "Ser un buen macarra"</h3>
-                <p>Jefe de Producción en rodaje de ficción. Coordinación de equipos, gestión de localizaciones y seguimiento.</p>
-                <span className="project-tag">Ficción</span>
+                <p>Jefe de Producción en rodaje de ficción. Coordinación de equipos, gestión de localizaciones y seguimiento de producción en set.</p>
+                <span className="experience-tag">Ficción</span>
               </div>
             </div>
 
-            <div className="project-card">
+            <div className="experience-card">
               <div className="carousel-container">
                 <img id="carousel-img-4" className="carousel-image" src="/projects/fiesta-wav-azul/img-1-opt.jpg" alt="Fiesta WAV Azul" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(4)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(4)}>›</button>
                 <div className="carousel-counter"><span id="counter-4">1</span>/3</div>
               </div>
-              <div className="project-info">
+              <div className="experience-info">
                 <h3>Fiesta WAV Azul</h3>
-                <p>Producción audiovisual de espectáculo y marketing. Captura de evento, edición y promoción digital.</p>
-                <span className="project-tag">Espectáculo</span>
+                <p>Producción audiovisual de espectáculo y marketing. Edición de contenido y promoción digital para amplificación en redes.</p>
+                <span className="experience-tag">Espectáculo</span>
               </div>
             </div>
 
-            <div className="project-card">
+            <div className="experience-card">
               <div className="carousel-container">
                 <img id="carousel-img-5" className="carousel-image" src="/projects/g-g-produccion-contenido/img-1-opt.jpg" alt="G&G Producción Audiovisual" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(5)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(5)}>›</button>
                 <div className="carousel-counter"><span id="counter-5">1</span>/4</div>
               </div>
-              <div className="project-info">
+              <div className="experience-info">
                 <h3>G&G - Producción Audiovisual</h3>
-                <p>Jefe de Producción en organización de eventos. Producción y gestión de contenido audiovisual para redes.</p>
-                <span className="project-tag">Espectáculo</span>
+                <p>Jefe de Producción de contenido audiovisual para marketing. Gestión integral de producción y coordinación en eventos deportivos y entretenimiento.</p>
+                <span className="experience-tag">Ocio y Deporte</span>
               </div>
             </div>
 
-            <div className="project-card">
+            <div className="experience-card">
               <div className="carousel-container">
                 <img id="carousel-img-6" className="carousel-image" src="/projects/serie-movistar-anatomia-instante/img-1-opt.jpg" alt="Serie Movistar Anatomía de un Instante" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(6)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(6)}>›</button>
                 <div className="carousel-counter"><span id="counter-6">1</span>/4</div>
               </div>
-              <div className="project-info">
+              <div className="experience-info">
                 <h3>Serie Movistar+ "Anatomía de un Instante"</h3>
-                <p>Bloquer y Apoyo de Producción. Participación en todas las fases de producción: preproducción, rodaje y coordinación.</p>
-                <span className="project-tag">Ficción</span>
+                <p>Blocker en 5 rodajes a través de Pase Producciones. Bloqueo de localizaciones y coordinación integral en serie de ficción televisiva.</p>
+                <span className="experience-tag">Ficción</span>
               </div>
             </div>
 
-            <div className="project-card">
+            <div className="experience-card">
               <div className="carousel-container">
                 <img id="carousel-img-7" className="carousel-image" src="/projects/programa-radiofonica/img-1-opt.jpg" alt="Programa Radiofónico Radiografía" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(7)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(7)}>›</button>
                 <div className="carousel-counter"><span id="counter-7">1</span>/3</div>
               </div>
-              <div className="project-info">
+              <div className="experience-info">
                 <h3>Programa Radiofónico "Radiografía"</h3>
-                <p>Productor Audiovisual en proyecto radiofónico. Gestión técnica, producción de contenido y coordinación.</p>
-                <span className="project-tag">Radio</span>
+                <p>Productor Audiovisual en proyecto radiofónico. Gestión técnica de producción, producción de contenido y coordinación de emisión.</p>
+                <span className="experience-tag">Radio</span>
               </div>
             </div>
 
-            <div className="project-card">
+            <div className="experience-card">
               <div className="carousel-container">
-                <img id="carousel-img-8" className="carousel-image" src="/projects/atresmedia-radio/img-1-opt.jpg" alt="Atresmedia Radio" />
+                <img id="carousel-img-8" className="carousel-image" src="/projects/atresmedia-radio/img-1-opt.jpg" alt="Atresmedia Experiencia Corporativa" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(8)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(8)}>›</button>
                 <div className="carousel-counter"><span id="counter-8">1</span>/6</div>
               </div>
-              <div className="project-info">
-                <h3>Atresmedia Radio - Experiencia Corporativa</h3>
-                <p>Coordinación de producción en visitas a instalaciones. Experiencia en entorno corporativo de medios.</p>
-                <span className="project-tag">Corporativo</span>
+              <div className="experience-info">
+                <h3>Atresmedia - Experiencia Corporativa</h3>
+                <p>Coordinación de producción en visitas a instalaciones corporativas. Experiencia en entorno corporativo de medios y radiodifusión.</p>
+                <span className="experience-tag">Corporativo</span>
               </div>
             </div>
 
-            <div className="project-card">
+            <div className="experience-card">
               <div className="carousel-container">
                 <img id="carousel-img-9" className="carousel-image" src="/projects/fe-2025-ongravity/img-1-opt.jpg" alt="FE 2025 Ongravity" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(9)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(9)}>›</button>
                 <div className="carousel-counter"><span id="counter-9">1</span>/4</div>
               </div>
-              <div className="project-info">
+              <div className="experience-info">
                 <h3>FE 2025 - Ongravity</h3>
-                <p>Ayudante de Producción y Cámara en proyecto audiovisual web. Participación en captura, rodaje y postproducción.</p>
-                <span className="project-tag">Web</span>
+                <p>Jefe de Producción y Posproductor. Participación en captura, rodaje y postproducción de contenido audiovisual para Instagram (Duración: 2 semanas).</p>
+                <span className="experience-tag">Prácticas</span>
               </div>
             </div>
           </div>
@@ -578,13 +693,13 @@ export default function Home() {
       <section className="contact" id="contacto">
         <div className="contact-content scroll-reveal">
           <h2>Conectemos</h2>
-          <p>¿Tienes un proyecto audiovisual en mente? Escríbeme para hablar sobre nuevas oportunidades de colaboración.</p>
+          <p>¿Tienes un proyecto audiovisual en mente? Escríbeme para hablar sobre nuevas oportunidades de colaboración en producción, postproducción o espectáculos.</p>
           <a href="mailto:elivaclips@gmail.com" className="contact-link">ENVIAR EMAIL</a>
         </div>
       </section>
 
       <footer>
-        <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos.</p>
+        <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos. Madrid, España.</p>
       </footer>
 
       <script dangerouslySetInnerHTML={{__html: `
