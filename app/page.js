@@ -497,9 +497,7 @@ export default function Home() {
             images: [
               '/projects/concierto-gabriel-piattore/img-1-opt.jpg',
               '/projects/concierto-gabriel-piattore/img-2-opt.jpg',
-              '/projects/concierto-gabriel-piattore/img-3-opt.jpg',
-              '/projects/concierto-gabriel-piattore/img-4-opt.jpg',
-              '/projects/concierto-gabriel-piattore/img-5-opt.jpg'
+              '/projects/concierto-gabriel-piattore/img-3-opt.jpg'
             ]
           }
         };
