@@ -1,27 +1,11 @@
 'use client'
 
-import { useEffect, FC } from 'react'
+import { useEffect } from 'react'
 
-interface CarouselState {
-  [key: number]: {
-    current: number
-    images: string[]
-  }
-}
-
-interface ExperienceData {
-  id: number
-  title: string
-  description: string
-  tag: string
-  folderName: string
-  imageCount: number
-}
-
-const Home: FC = () => {
+export default function Home() {
   useEffect(() => {
     // Initialize carousel state
-    const carouselState: CarouselState = {
+    const carouselState = {
       1: { current: 0, images: ['/projects/graduacion-fp/img-1-opt.jpg', '/projects/graduacion-fp/img-2-opt.jpg', '/projects/graduacion-fp/img-3-opt.jpg', '/projects/graduacion-fp/img-4-opt.jpg', '/projects/graduacion-fp/img-5-opt.jpg'] },
       2: { current: 0, images: ['/projects/concierto-gabriel-piattore/img-1-opt.jpg', '/projects/concierto-gabriel-piattore/img-2-opt.jpg', '/projects/concierto-gabriel-piattore/img-3-opt.jpg'] },
       3: { current: 0, images: ['/projects/cortometraje-ser-buen-macarra/img-1-opt.jpg', '/projects/cortometraje-ser-buen-macarra/img-2-opt.jpg', '/projects/cortometraje-ser-buen-macarra/img-3-opt.jpg', '/projects/cortometraje-ser-buen-macarra/img-4-opt.jpg'] },
@@ -33,34 +17,29 @@ const Home: FC = () => {
       9: { current: 0, images: ['/projects/fe-2025-ongravity/img-1-opt.jpg', '/projects/fe-2025-ongravity/img-2-opt.jpg', '/projects/fe-2025-ongravity/img-3-opt.jpg', '/projects/fe-2025-ongravity/img-4-opt.jpg'] }
     }
 
-    // Carousel functions
-    const carouselNext = (projectId: number): void => {
+    window.carouselNext = (projectId) => {
       const state = carouselState[projectId]
       if (!state) return
       state.current = (state.current + 1) % state.images.length
       updateCarousel(projectId)
     }
 
-    const carouselPrev = (projectId: number): void => {
+    window.carouselPrev = (projectId) => {
       const state = carouselState[projectId]
       if (!state) return
       state.current = (state.current - 1 + state.images.length) % state.images.length
       updateCarousel(projectId)
     }
 
-    const updateCarousel = (projectId: number): void => {
+    const updateCarousel = (projectId) => {
       const state = carouselState[projectId]
       const img = document.getElementById(`carousel-img-${projectId}`)
       const counter = document.getElementById(`counter-${projectId}`)
       if (img && counter) {
         img.src = state.images[state.current]
-        counter.textContent = (state.current + 1).toString()
+        counter.textContent = state.current + 1
       }
     }
-
-    // Attach to window
-    (window as any).carouselNext = carouselNext
-    (window as any).carouselPrev = carouselPrev
 
     // Scroll reveal animations
     const observerOptions = {
@@ -83,7 +62,7 @@ const Home: FC = () => {
     return () => observer.disconnect()
   }, [])
 
-  const experiences: ExperienceData[] = [
+  const experiences = [
     { id: 1, title: 'Graduación Planeta FP', description: 'Ciclo Superior de Producción Audiovisual y su Producción para TV y Eventos. Coordinación de equipo técnico, captura y edición de contenido audiovisual.', tag: 'Evento', folderName: 'graduacion-fp', imageCount: 5 },
     { id: 2, title: 'Concierto Gabriel Piattore', description: 'Director de Cámara en concierto musical en vivo. Dirección de ángulos de cámara, movimientos de realización y gestión técnica en rodaje.', tag: 'Música', folderName: 'concierto-gabriel-piattore', imageCount: 3 },
     { id: 3, title: 'Cortometraje "Ser un buen macarra"', description: 'Jefe de Producción en rodaje de ficción. Coordinación de equipos, gestión de localizaciones y seguimiento de producción en set.', tag: 'Ficción', folderName: 'cortometraje-ser-buen-macarra', imageCount: 4 },
@@ -324,25 +303,6 @@ const Home: FC = () => {
           font-weight: 800;
           letter-spacing: -1px;
           text-align: center;
-        }
-        .vimeo-player {
-          position: relative;
-          width: 100%;
-          padding-bottom: 56.25%;
-          height: 0;
-          overflow: hidden;
-          border-radius: 20px;
-          box-shadow: 0 20px 60px rgba(26, 77, 92, 0.15);
-          animation: fadeInUp 0.8s ease-out 0.3s backwards;
-        }
-        .vimeo-player iframe {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border-radius: 20px;
-          border: none;
         }
         .reel-placeholder {
           width: 100%;
@@ -748,8 +708,8 @@ const Home: FC = () => {
               <div key={exp.id} className="experience-card">
                 <div className="carousel-container">
                   <img id={`carousel-img-${exp.id}`} className="carousel-image" src={`/projects/${exp.folderName}/img-1-opt.jpg`} alt={exp.title} />
-                  <button className="carousel-nav-btn prev" onClick={() => (window as any).carouselPrev(exp.id)}>‹</button>
-                  <button className="carousel-nav-btn next" onClick={() => (window as any).carouselNext(exp.id)}>›</button>
+                  <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(exp.id)}>‹</button>
+                  <button className="carousel-nav-btn next" onClick={() => window.carouselNext(exp.id)}>›</button>
                   <div className="carousel-counter"><span id={`counter-${exp.id}`}>1</span>/{exp.imageCount}</div>
                 </div>
                 <div className="experience-info">
@@ -780,5 +740,3 @@ const Home: FC = () => {
     </>
   )
 }
-
-export default Home
