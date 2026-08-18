@@ -421,7 +421,7 @@ export default function Home() {
                 <img id="carousel-img-5" className="carousel-image" src="/projects/g-g-produccion-contenido/img-1-opt.jpg" alt="G&G Producción Audiovisual" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(5)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(5)}>›</button>
-                <div className="carousel-counter"><span id="counter-5">1</span>/2</div>
+                <div className="carousel-counter"><span id="counter-5">1</span>/4</div>
               </div>
               <div className="project-info">
                 <h3>G&G - Producción Audiovisual</h3>
@@ -449,7 +449,7 @@ export default function Home() {
                 <img id="carousel-img-7" className="carousel-image" src="/projects/programa-radiofonica/img-1-opt.jpg" alt="Programa Radiofónico Radiografía" />
                 <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(7)}>‹</button>
                 <button className="carousel-nav-btn next" onClick={() => window.carouselNext(7)}>›</button>
-                <div className="carousel-counter"><span id="counter-7">1</span>/2</div>
+                <div className="carousel-counter"><span id="counter-7">1</span>/3</div>
               </div>
               <div className="project-info">
                 <h3>Programa Radiofónico "Radiografía"</h3>
@@ -542,7 +542,9 @@ export default function Home() {
             current: 0,
             images: [
               '/projects/g-g-produccion-contenido/img-1-opt.jpg',
-              '/projects/g-g-produccion-contenido/img-2-opt.jpg'
+              '/projects/g-g-produccion-contenido/img-2-opt.jpg',
+              '/projects/g-g-produccion-contenido/img-3-opt.jpg',
+              '/projects/g-g-produccion-contenido/img-4-opt.jpg'
             ]
           },
           6: {
@@ -558,7 +560,8 @@ export default function Home() {
             current: 0,
             images: [
               '/projects/programa-radiofonica/img-1-opt.jpg',
-              '/projects/programa-radiofonica/img-2-opt.jpg'
+              '/projects/programa-radiofonica/img-2-opt.jpg',
+              '/projects/programa-radiofonica/img-3-opt.jpg'
             ]
           },
           8: {
