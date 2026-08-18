@@ -474,10 +474,13 @@ export default function Home() {
 
             <div className="project-card">
               <div className="carousel-container">
-                <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🚀</span>
+                <img id="carousel-img-9" className="carousel-image" src="/projects/fe-2025-ongravity/img-1-opt.jpg" alt="FE 2025 Ongravity" />
+                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(9)}>‹</button>
+                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(9)}>›</button>
+                <div className="carousel-counter"><span id="counter-9">1</span>/4</div>
               </div>
               <div className="project-info">
-                <h3>FE 2025 - Ungravity</h3>
+                <h3>FE 2025 - Ongravity</h3>
                 <p>Ayudante de Producción y Cámara en proyecto audiovisual web. Participación en captura, rodaje y postproducción de contenido digital.</p>
                 <span className="project-tag">Web</span>
               </div>
@@ -567,6 +570,15 @@ export default function Home() {
               '/projects/atresmedia-radio/img-4-opt.jpg',
               '/projects/atresmedia-radio/img-5-opt.jpg',
               '/projects/atresmedia-radio/img-6-opt.jpg'
+            ]
+          },
+          9: {
+            current: 0,
+            images: [
+              '/projects/fe-2025-ongravity/img-1-opt.jpg',
+              '/projects/fe-2025-ongravity/img-2-opt.jpg',
+              '/projects/fe-2025-ongravity/img-3-opt.jpg',
+              '/projects/fe-2025-ongravity/img-4-opt.jpg'
             ]
           }
         };
