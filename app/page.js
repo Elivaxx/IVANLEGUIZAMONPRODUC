@@ -39,10 +39,6 @@ export default function Home() {
             from { opacity: 0; transform: translateX(50px); }
             to { opacity: 1; transform: translateX(0); }
           }
-          @keyframes slideRight {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-          }
 
           /* Navigation */
           nav {
@@ -203,59 +199,64 @@ export default function Home() {
             border-color: rgba(26, 77, 92, 0.3);
           }
 
-          .project-image-container {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, var(--petrol) 0%, var(--charcoal) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--cream);
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            padding: 1rem;
+          .carousel-container {
             position: relative;
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--petrol) 0%, var(--charcoal) 100%);
+            border-radius: 12px 12px 0 0;
             overflow: hidden;
           }
 
-          .project-image {
+          .carousel-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             animation: slideLeft 0.5s ease-out;
           }
 
-          .carousel-nav {
+          .carousel-nav-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             background: rgba(245, 241, 232, 0.9);
-            color: var(--petrol);
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 20px;
+            color: var(--petrol);
             transition: all 0.3s;
             z-index: 10;
           }
 
-          .carousel-nav:hover {
+          .carousel-nav-btn:hover {
             background: var(--cream);
             transform: translateY(-50%) scale(1.1);
           }
 
-          .carousel-nav.prev {
-            left: 10px;
+          .carousel-nav-btn.prev {
+            left: 12px;
           }
 
-          .carousel-nav.next {
-            right: 10px;
+          .carousel-nav-btn.next {
+            right: 12px;
+          }
+
+          .carousel-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            background: rgba(26, 77, 92, 0.8);
+            color: var(--cream);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
           }
 
           .project-info {
@@ -334,7 +335,7 @@ export default function Home() {
             .section-title { font-size: 1.8rem; }
             .nav-links { display: none; }
             .projects-grid { grid-template-columns: 1fr; }
-            .project-image-container { height: 200px; }
+            .carousel-container { height: 200px; }
           }
         `}</style>
       </head>
@@ -378,8 +379,11 @@ export default function Home() {
             <h2 className="section-title">Proyectos</h2>
             <div className="projects-grid">
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>📽️</span>
+                <div className="carousel-container">
+                  <img id="carousel-img-1" className="carousel-image" src="/projects/graduacion-fp/img-1-opt.jpg" alt="Graduación Planeta FP" />
+                  <button className="carousel-nav-btn prev" onclick="carouselPrev(1)">‹</button>
+                  <button className="carousel-nav-btn next" onclick="carouselNext(1)">›</button>
+                  <div className="carousel-counter"><span id="counter-1">1</span>/5</div>
                 </div>
                 <div className="project-info">
                   <h3>Graduación Planeta FP</h3>
@@ -389,8 +393,8 @@ export default function Home() {
               </div>
 
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>🎬</span>
+                <div className="carousel-container">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🎬</span>
                 </div>
                 <div className="project-info">
                   <h3>Concierto Gabriel Piattore</h3>
@@ -400,8 +404,8 @@ export default function Home() {
               </div>
 
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>🎥</span>
+                <div className="carousel-container">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🎥</span>
                 </div>
                 <div className="project-info">
                   <h3>Cortometraje "Ser un buen macarra"</h3>
@@ -411,8 +415,8 @@ export default function Home() {
               </div>
 
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>🎉</span>
+                <div className="carousel-container">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🎉</span>
                 </div>
                 <div className="project-info">
                   <h3>Fiesta WAV Azul</h3>
@@ -422,8 +426,8 @@ export default function Home() {
               </div>
 
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>📱</span>
+                <div className="carousel-container">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">📱</span>
                 </div>
                 <div className="project-info">
                   <h3>G&G - Producción Audiovisual</h3>
@@ -433,8 +437,8 @@ export default function Home() {
               </div>
 
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>📺</span>
+                <div className="carousel-container">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">📺</span>
                 </div>
                 <div className="project-info">
                   <h3>Serie Movistar+ "Anatomía de un Instante"</h3>
@@ -444,8 +448,8 @@ export default function Home() {
               </div>
 
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>🎙️</span>
+                <div className="carousel-container">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🎙️</span>
                 </div>
                 <div className="project-info">
                   <h3>Programa Radiofónico "Radiografía"</h3>
@@ -455,8 +459,8 @@ export default function Home() {
               </div>
 
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>🏢</span>
+                <div className="carousel-container">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🏢</span>
                 </div>
                 <div className="project-info">
                   <h3>Atresmedia Radio - Experiencia Corporativa</h3>
@@ -466,8 +470,8 @@ export default function Home() {
               </div>
 
               <div className="project-card">
-                <div className="project-image-container">
-                  <span>🚀</span>
+                <div className="carousel-container">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🚀</span>
                 </div>
                 <div className="project-info">
                   <h3>FE 2025 - Ungravity</h3>
@@ -490,6 +494,44 @@ export default function Home() {
         <footer>
           <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos.</p>
         </footer>
+
+        <script>{`
+          // Carousel state (in-memory, no localStorage)
+          const carouselState = {
+            1: {
+              current: 0,
+              images: [
+                '/projects/graduacion-fp/img-1-opt.jpg',
+                '/projects/graduacion-fp/img-2-opt.jpg',
+                '/projects/graduacion-fp/img-3-opt.jpg',
+                '/projects/graduacion-fp/img-4-opt.jpg',
+                '/projects/graduacion-fp/img-5-opt.jpg'
+              ]
+            }
+          };
+
+          function carouselNext(projectId) {
+            const state = carouselState[projectId];
+            state.current = (state.current + 1) % state.images.length;
+            updateCarousel(projectId);
+          }
+
+          function carouselPrev(projectId) {
+            const state = carouselState[projectId];
+            state.current = (state.current - 1 + state.images.length) % state.images.length;
+            updateCarousel(projectId);
+          }
+
+          function updateCarousel(projectId) {
+            const state = carouselState[projectId];
+            const img = document.getElementById('carousel-img-' + projectId);
+            const counter = document.getElementById('counter-' + projectId);
+            if (img) {
+              img.src = state.images[state.current];
+              counter.textContent = state.current + 1;
+            }
+          }
+        `}</script>
       </body>
     </html>
   )
