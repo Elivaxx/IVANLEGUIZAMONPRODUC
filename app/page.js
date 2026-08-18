@@ -418,7 +418,10 @@ export default function Home() {
 
             <div className="project-card">
               <div className="carousel-container">
-                <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>📱</span>
+                <img id="carousel-img-5" className="carousel-image" src="/projects/g-g-produccion-contenido/img-1-opt.jpg" alt="G&G Producción Audiovisual" />
+                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(5)}>‹</button>
+                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(5)}>›</button>
+                <div className="carousel-counter"><span id="counter-5">1</span>/2</div>
               </div>
               <div className="project-info">
                 <h3>G&G - Producción Audiovisual</h3>
@@ -524,6 +527,13 @@ export default function Home() {
               '/projects/fiesta-wav-azul/img-1-opt.jpg',
               '/projects/fiesta-wav-azul/img-2-opt.jpg',
               '/projects/fiesta-wav-azul/img-3-opt.jpg'
+            ]
+          },
+          5: {
+            current: 0,
+            images: [
+              '/projects/g-g-produccion-contenido/img-1-opt.jpg',
+              '/projects/g-g-produccion-contenido/img-2-opt.jpg'
             ]
           },
           6: {
