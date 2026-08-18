@@ -381,8 +381,8 @@ export default function Home() {
               <div className="project-card">
                 <div className="carousel-container">
                   <img id="carousel-img-1" className="carousel-image" src="/projects/graduacion-fp/img-1-opt.jpg" alt="Graduación Planeta FP" />
-                  <button className="carousel-nav-btn prev" onclick="carouselPrev(1)">‹</button>
-                  <button className="carousel-nav-btn next" onclick="carouselNext(1)">›</button>
+                  <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(1)}>‹</button>
+                  <button className="carousel-nav-btn next" onClick={() => window.carouselNext(1)}>›</button>
                   <div className="carousel-counter"><span id="counter-1">1</span>/5</div>
                 </div>
                 <div className="project-info">
@@ -510,23 +510,25 @@ export default function Home() {
             }
           };
 
-          function carouselNext(projectId) {
+          window.carouselNext = function(projectId) {
             const state = carouselState[projectId];
+            if (!state) return;
             state.current = (state.current + 1) % state.images.length;
-            updateCarousel(projectId);
+            window.updateCarousel(projectId);
           }
 
-          function carouselPrev(projectId) {
+          window.carouselPrev = function(projectId) {
             const state = carouselState[projectId];
+            if (!state) return;
             state.current = (state.current - 1 + state.images.length) % state.images.length;
-            updateCarousel(projectId);
+            window.updateCarousel(projectId);
           }
 
-          function updateCarousel(projectId) {
+          window.updateCarousel = function(projectId) {
             const state = carouselState[projectId];
             const img = document.getElementById('carousel-img-' + projectId);
             const counter = document.getElementById('counter-' + projectId);
-            if (img) {
+            if (img && counter) {
               img.src = state.images[state.current];
               counter.textContent = state.current + 1;
             }
