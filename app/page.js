@@ -460,7 +460,10 @@ export default function Home() {
 
             <div className="project-card">
               <div className="carousel-container">
-                <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🏢</span>
+                <img id="carousel-img-8" className="carousel-image" src="/projects/atresmedia-radio/img-1-opt.jpg" alt="Atresmedia Radio" />
+                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(8)}>‹</button>
+                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(8)}>›</button>
+                <div className="carousel-counter"><span id="counter-8">1</span>/6</div>
               </div>
               <div className="project-info">
                 <h3>Atresmedia Radio - Experiencia Corporativa</h3>
@@ -553,6 +556,17 @@ export default function Home() {
             images: [
               '/projects/programa-radiofonica/img-1-opt.jpg',
               '/projects/programa-radiofonica/img-2-opt.jpg'
+            ]
+          },
+          8: {
+            current: 0,
+            images: [
+              '/projects/atresmedia-radio/img-1-opt.jpg',
+              '/projects/atresmedia-radio/img-2-opt.jpg',
+              '/projects/atresmedia-radio/img-3-opt.jpg',
+              '/projects/atresmedia-radio/img-4-opt.jpg',
+              '/projects/atresmedia-radio/img-5-opt.jpg',
+              '/projects/atresmedia-radio/img-6-opt.jpg'
             ]
           }
         };
