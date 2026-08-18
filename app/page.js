@@ -446,7 +446,10 @@ export default function Home() {
 
             <div className="project-card">
               <div className="carousel-container">
-                <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🎙️</span>
+                <img id="carousel-img-7" className="carousel-image" src="/projects/programa-radiofonica/img-1-opt.jpg" alt="Programa Radiofónico Radiografía" />
+                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(7)}>‹</button>
+                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(7)}>›</button>
+                <div className="carousel-counter"><span id="counter-7">1</span>/2</div>
               </div>
               <div className="project-info">
                 <h3>Programa Radiofónico "Radiografía"</h3>
@@ -543,6 +546,13 @@ export default function Home() {
               '/projects/serie-movistar-anatomia-instante/img-2-opt.jpg',
               '/projects/serie-movistar-anatomia-instante/img-3-opt.jpg',
               '/projects/serie-movistar-anatomia-instante/img-4-opt.jpg'
+            ]
+          },
+          7: {
+            current: 0,
+            images: [
+              '/projects/programa-radiofonica/img-1-opt.jpg',
+              '/projects/programa-radiofonica/img-2-opt.jpg'
             ]
           }
         };
