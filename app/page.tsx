@@ -1,6 +1,100 @@
 'use client'
 
-export default function Home() {
+import { useEffect, FC } from 'react'
+
+interface CarouselState {
+  [key: number]: {
+    current: number
+    images: string[]
+  }
+}
+
+interface ExperienceData {
+  id: number
+  title: string
+  description: string
+  tag: string
+  folderName: string
+  imageCount: number
+}
+
+const Home: FC = () => {
+  useEffect(() => {
+    // Initialize carousel state
+    const carouselState: CarouselState = {
+      1: { current: 0, images: ['/projects/graduacion-fp/img-1-opt.jpg', '/projects/graduacion-fp/img-2-opt.jpg', '/projects/graduacion-fp/img-3-opt.jpg', '/projects/graduacion-fp/img-4-opt.jpg', '/projects/graduacion-fp/img-5-opt.jpg'] },
+      2: { current: 0, images: ['/projects/concierto-gabriel-piattore/img-1-opt.jpg', '/projects/concierto-gabriel-piattore/img-2-opt.jpg', '/projects/concierto-gabriel-piattore/img-3-opt.jpg'] },
+      3: { current: 0, images: ['/projects/cortometraje-ser-buen-macarra/img-1-opt.jpg', '/projects/cortometraje-ser-buen-macarra/img-2-opt.jpg', '/projects/cortometraje-ser-buen-macarra/img-3-opt.jpg', '/projects/cortometraje-ser-buen-macarra/img-4-opt.jpg'] },
+      4: { current: 0, images: ['/projects/fiesta-wav-azul/img-1-opt.jpg', '/projects/fiesta-wav-azul/img-2-opt.jpg', '/projects/fiesta-wav-azul/img-3-opt.jpg'] },
+      5: { current: 0, images: ['/projects/g-g-produccion-contenido/img-1-opt.jpg', '/projects/g-g-produccion-contenido/img-2-opt.jpg', '/projects/g-g-produccion-contenido/img-3-opt.jpg', '/projects/g-g-produccion-contenido/img-4-opt.jpg'] },
+      6: { current: 0, images: ['/projects/serie-movistar-anatomia-instante/img-1-opt.jpg', '/projects/serie-movistar-anatomia-instante/img-2-opt.jpg', '/projects/serie-movistar-anatomia-instante/img-3-opt.jpg', '/projects/serie-movistar-anatomia-instante/img-4-opt.jpg'] },
+      7: { current: 0, images: ['/projects/programa-radiofonica/img-1-opt.jpg', '/projects/programa-radiofonica/img-2-opt.jpg', '/projects/programa-radiofonica/img-3-opt.jpg'] },
+      8: { current: 0, images: ['/projects/atresmedia-radio/img-1-opt.jpg', '/projects/atresmedia-radio/img-2-opt.jpg', '/projects/atresmedia-radio/img-3-opt.jpg', '/projects/atresmedia-radio/img-4-opt.jpg', '/projects/atresmedia-radio/img-5-opt.jpg', '/projects/atresmedia-radio/img-6-opt.jpg'] },
+      9: { current: 0, images: ['/projects/fe-2025-ongravity/img-1-opt.jpg', '/projects/fe-2025-ongravity/img-2-opt.jpg', '/projects/fe-2025-ongravity/img-3-opt.jpg', '/projects/fe-2025-ongravity/img-4-opt.jpg'] }
+    }
+
+    // Carousel functions
+    const carouselNext = (projectId: number): void => {
+      const state = carouselState[projectId]
+      if (!state) return
+      state.current = (state.current + 1) % state.images.length
+      updateCarousel(projectId)
+    }
+
+    const carouselPrev = (projectId: number): void => {
+      const state = carouselState[projectId]
+      if (!state) return
+      state.current = (state.current - 1 + state.images.length) % state.images.length
+      updateCarousel(projectId)
+    }
+
+    const updateCarousel = (projectId: number): void => {
+      const state = carouselState[projectId]
+      const img = document.getElementById(`carousel-img-${projectId}`)
+      const counter = document.getElementById(`counter-${projectId}`)
+      if (img && counter) {
+        img.src = state.images[state.current]
+        counter.textContent = (state.current + 1).toString()
+      }
+    }
+
+    // Attach to window
+    (window as any).carouselNext = carouselNext
+    (window as any).carouselPrev = carouselPrev
+
+    // Scroll reveal animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    }, observerOptions)
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const experiences: ExperienceData[] = [
+    { id: 1, title: 'Graduación Planeta FP', description: 'Ciclo Superior de Producción Audiovisual y su Producción para TV y Eventos. Coordinación de equipo técnico, captura y edición de contenido audiovisual.', tag: 'Evento', folderName: 'graduacion-fp', imageCount: 5 },
+    { id: 2, title: 'Concierto Gabriel Piattore', description: 'Director de Cámara en concierto musical en vivo. Dirección de ángulos de cámara, movimientos de realización y gestión técnica en rodaje.', tag: 'Música', folderName: 'concierto-gabriel-piattore', imageCount: 3 },
+    { id: 3, title: 'Cortometraje "Ser un buen macarra"', description: 'Jefe de Producción en rodaje de ficción. Coordinación de equipos, gestión de localizaciones y seguimiento de producción en set.', tag: 'Ficción', folderName: 'cortometraje-ser-buen-macarra', imageCount: 4 },
+    { id: 4, title: 'Fiesta WAV Azul', description: 'Producción audiovisual de espectáculo y marketing. Edición de contenido y promoción digital para amplificación en redes.', tag: 'Espectáculo', folderName: 'fiesta-wav-azul', imageCount: 3 },
+    { id: 5, title: 'G&G - Producción Audiovisual', description: 'Jefe de Producción de contenido audiovisual para marketing. Gestión integral de producción y coordinación en eventos deportivos y entretenimiento.', tag: 'Ocio y Deporte', folderName: 'g-g-produccion-contenido', imageCount: 4 },
+    { id: 6, title: 'Serie Movistar+ "Anatomía de un Instante"', description: 'Blocker en 5 rodajes a través de Pase Producciones. Bloqueo de localizaciones y coordinación integral en serie de ficción televisiva.', tag: 'Ficción', folderName: 'serie-movistar-anatomia-instante', imageCount: 4 },
+    { id: 7, title: 'Programa Radiofónico "Radiografía"', description: 'Productor Audiovisual en proyecto radiofónico. Gestión técnica de producción, producción de contenido y coordinación de emisión.', tag: 'Radio', folderName: 'programa-radiofonica', imageCount: 3 },
+    { id: 8, title: 'Atresmedia - Experiencia Corporativa', description: 'Coordinación de producción en visitas a instalaciones corporativas. Experiencia en entorno corporativo de medios y radiodifusión.', tag: 'Corporativo', folderName: 'atresmedia-radio', imageCount: 6 },
+    { id: 9, title: 'FE 2025 - Ongravity', description: 'Jefe de Producción y Posproductor. Participación en captura, rodaje y postproducción de contenido audiovisual para Instagram (Duración: 2 semanas).', tag: 'Prácticas', folderName: 'fe-2025-ongravity', imageCount: 4 }
+  ]
+
   return (
     <>
       <style>{`
@@ -49,20 +143,6 @@ export default function Home() {
         @keyframes shimmer {
           0%, 100% { opacity: 0.1; }
           50% { opacity: 0.3; }
-        }
-
-        /* Decorative elements */
-        .bg-decoration {
-          position: fixed;
-          pointer-events: none;
-          opacity: 0.05;
-          z-index: 0;
-        }
-        .decoration-circle {
-          position: absolute;
-          border-radius: 50%;
-          border: 2px solid var(--petrol);
-          animation: shimmer 4s ease-in-out infinite;
         }
 
         nav {
@@ -225,6 +305,61 @@ export default function Home() {
           font-weight: 500;
         }
 
+        .reel-section {
+          padding: 6rem 2rem;
+          background: linear-gradient(180deg, #e8e6e2 0%, #f2f0ec 100%);
+          position: relative;
+        }
+        .reel-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+        }
+        .reel-title {
+          font-size: 2.8rem;
+          margin-bottom: 3rem;
+          color: var(--charcoal);
+          animation: fadeInUp 0.8s ease-out 0.2s backwards;
+          font-weight: 800;
+          letter-spacing: -1px;
+          text-align: center;
+        }
+        .vimeo-player {
+          position: relative;
+          width: 100%;
+          padding-bottom: 56.25%;
+          height: 0;
+          overflow: hidden;
+          border-radius: 20px;
+          box-shadow: 0 20px 60px rgba(26, 77, 92, 0.15);
+          animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+        .vimeo-player iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 20px;
+          border: none;
+        }
+        .reel-placeholder {
+          width: 100%;
+          height: 600px;
+          background: linear-gradient(135deg, var(--petrol) 0%, var(--charcoal) 100%);
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--cream);
+          font-size: 1.5rem;
+          text-align: center;
+          font-weight: 600;
+          animation: fadeInUp 0.8s ease-out 0.3s backwards;
+          box-shadow: 0 20px 60px rgba(26, 77, 92, 0.15);
+        }
+
         .experiences {
           padding: 6rem 2rem;
           background: linear-gradient(180deg, #f2f0ec 0%, #efeced 100%);
@@ -270,6 +405,7 @@ export default function Home() {
           box-shadow: 0 10px 30px rgba(26, 77, 92, 0.08), inset 0 1px 0 rgba(255,255,255,0.3);
           position: relative;
           overflow: visible;
+          will-change: transform;
         }
         .experience-card::before {
           content: '';
@@ -295,9 +431,6 @@ export default function Home() {
         .experience-card:nth-child(7) { animation-delay: 0.4s; }
         .experience-card:nth-child(8) { animation-delay: 0.45s; }
         .experience-card:nth-child(9) { animation-delay: 0.5s; }
-        .experience-card {
-          will-change: transform;
-        }
         .experience-card:hover {
           transform: translateY(-12px);
           background: rgba(255, 255, 255, 0.8);
@@ -428,6 +561,13 @@ export default function Home() {
           line-height: 1.8;
           font-weight: 500;
         }
+        .contact-buttons {
+          display: flex;
+          gap: 1.5rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 1.5rem;
+        }
         .contact-link {
           display: inline-block;
           background: var(--cream);
@@ -444,13 +584,6 @@ export default function Home() {
         .contact-link:hover {
           transform: translateY(-4px);
           box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-        }
-        .contact-buttons {
-          display: flex;
-          gap: 1.5rem;
-          justify-content: center;
-          flex-wrap: wrap;
-          margin-top: 1.5rem;
         }
         .cv-link {
           display: inline-block;
@@ -524,6 +657,8 @@ export default function Home() {
           .contact-link, .cv-link {
             width: 100%;
           }
+          .reel-title { font-size: 1.8rem; }
+          .reel-placeholder { height: 300px; }
         }
       `}</style>
 
@@ -532,6 +667,7 @@ export default function Home() {
           <div className="logo">IVÁN LEGUIZAMÓN • PRODUCTOR</div>
           <ul className="nav-links">
             <li><a href="#about">Sobre mí</a></li>
+            <li><a href="#reel">Reel</a></li>
             <li><a href="#experiencias">Experiencias</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
@@ -594,135 +730,35 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="reel-section" id="reel">
+        <div className="reel-container">
+          <h2 className="reel-title scroll-reveal">Mi Reel Audiovisual</h2>
+          <div className="reel-placeholder">
+            📹 Agrega aquí tu Vimeo/YouTube reel<br/>
+            <span style={{fontSize: '0.9rem', marginTop: '1rem', opacity: 0.8}}>Cambiar URL: src=&quot;https://vimeo.com/TU_VIDEO_ID&quot;</span>
+          </div>
+        </div>
+      </section>
+
       <section className="experiences" id="experiencias">
         <div className="container">
           <h2 className="section-title scroll-reveal">Experiencias</h2>
           <div className="experiences-grid">
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-1" className="carousel-image" src="/projects/graduacion-fp/img-1-opt.jpg" alt="Graduación Planeta FP" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(1)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(1)}>›</button>
-                <div className="carousel-counter"><span id="counter-1">1</span>/5</div>
+            {experiences.map((exp) => (
+              <div key={exp.id} className="experience-card">
+                <div className="carousel-container">
+                  <img id={`carousel-img-${exp.id}`} className="carousel-image" src={`/projects/${exp.folderName}/img-1-opt.jpg`} alt={exp.title} />
+                  <button className="carousel-nav-btn prev" onClick={() => (window as any).carouselPrev(exp.id)}>‹</button>
+                  <button className="carousel-nav-btn next" onClick={() => (window as any).carouselNext(exp.id)}>›</button>
+                  <div className="carousel-counter"><span id={`counter-${exp.id}`}>1</span>/{exp.imageCount}</div>
+                </div>
+                <div className="experience-info">
+                  <h3>{exp.title}</h3>
+                  <p>{exp.description}</p>
+                  <span className="experience-tag">{exp.tag}</span>
+                </div>
               </div>
-              <div className="experience-info">
-                <h3>Graduación Planeta FP</h3>
-                <p>Ciclo Superior de Producción Audiovisual y su Producción para TV y Eventos. Coordinación de equipo técnico, captura y edición de contenido audiovisual.</p>
-                <span className="experience-tag">Evento</span>
-              </div>
-            </div>
-
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-2" className="carousel-image" src="/projects/concierto-gabriel-piattore/img-1-opt.jpg" alt="Concierto Gabriel Piattore" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(2)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(2)}>›</button>
-                <div className="carousel-counter"><span id="counter-2">1</span>/3</div>
-              </div>
-              <div className="experience-info">
-                <h3>Concierto Gabriel Piattore</h3>
-                <p>Director de Cámara en concierto musical en vivo. Dirección de ángulos de cámara, movimientos de realización y gestión técnica en rodaje.</p>
-                <span className="experience-tag">Música</span>
-              </div>
-            </div>
-
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-3" className="carousel-image" src="/projects/cortometraje-ser-buen-macarra/img-1-opt.jpg" alt="Cortometraje Ser un buen macarra" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(3)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(3)}>›</button>
-                <div className="carousel-counter"><span id="counter-3">1</span>/4</div>
-              </div>
-              <div className="experience-info">
-                <h3>Cortometraje "Ser un buen macarra"</h3>
-                <p>Jefe de Producción en rodaje de ficción. Coordinación de equipos, gestión de localizaciones y seguimiento de producción en set.</p>
-                <span className="experience-tag">Ficción</span>
-              </div>
-            </div>
-
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-4" className="carousel-image" src="/projects/fiesta-wav-azul/img-1-opt.jpg" alt="Fiesta WAV Azul" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(4)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(4)}>›</button>
-                <div className="carousel-counter"><span id="counter-4">1</span>/3</div>
-              </div>
-              <div className="experience-info">
-                <h3>Fiesta WAV Azul</h3>
-                <p>Producción audiovisual de espectáculo y marketing. Edición de contenido y promoción digital para amplificación en redes.</p>
-                <span className="experience-tag">Espectáculo</span>
-              </div>
-            </div>
-
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-5" className="carousel-image" src="/projects/g-g-produccion-contenido/img-1-opt.jpg" alt="G&G Producción Audiovisual" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(5)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(5)}>›</button>
-                <div className="carousel-counter"><span id="counter-5">1</span>/4</div>
-              </div>
-              <div className="experience-info">
-                <h3>G&G - Producción Audiovisual</h3>
-                <p>Jefe de Producción de contenido audiovisual para marketing. Gestión integral de producción y coordinación en eventos deportivos y entretenimiento.</p>
-                <span className="experience-tag">Ocio y Deporte</span>
-              </div>
-            </div>
-
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-6" className="carousel-image" src="/projects/serie-movistar-anatomia-instante/img-1-opt.jpg" alt="Serie Movistar Anatomía de un Instante" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(6)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(6)}>›</button>
-                <div className="carousel-counter"><span id="counter-6">1</span>/4</div>
-              </div>
-              <div className="experience-info">
-                <h3>Serie Movistar+ "Anatomía de un Instante"</h3>
-                <p>Blocker en 5 rodajes a través de Pase Producciones. Bloqueo de localizaciones y coordinación integral en serie de ficción televisiva.</p>
-                <span className="experience-tag">Ficción</span>
-              </div>
-            </div>
-
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-7" className="carousel-image" src="/projects/programa-radiofonica/img-1-opt.jpg" alt="Programa Radiofónico Radiografía" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(7)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(7)}>›</button>
-                <div className="carousel-counter"><span id="counter-7">1</span>/3</div>
-              </div>
-              <div className="experience-info">
-                <h3>Programa Radiofónico "Radiografía"</h3>
-                <p>Productor Audiovisual en proyecto radiofónico. Gestión técnica de producción, producción de contenido y coordinación de emisión.</p>
-                <span className="experience-tag">Radio</span>
-              </div>
-            </div>
-
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-8" className="carousel-image" src="/projects/atresmedia-radio/img-1-opt.jpg" alt="Atresmedia Experiencia Corporativa" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(8)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(8)}>›</button>
-                <div className="carousel-counter"><span id="counter-8">1</span>/6</div>
-              </div>
-              <div className="experience-info">
-                <h3>Atresmedia - Experiencia Corporativa</h3>
-                <p>Coordinación de producción en visitas a instalaciones corporativas. Experiencia en entorno corporativo de medios y radiodifusión.</p>
-                <span className="experience-tag">Corporativo</span>
-              </div>
-            </div>
-
-            <div className="experience-card">
-              <div className="carousel-container">
-                <img id="carousel-img-9" className="carousel-image" src="/projects/fe-2025-ongravity/img-1-opt.jpg" alt="FE 2025 Ongravity" />
-                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(9)}>‹</button>
-                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(9)}>›</button>
-                <div className="carousel-counter"><span id="counter-9">1</span>/4</div>
-              </div>
-              <div className="experience-info">
-                <h3>FE 2025 - Ongravity</h3>
-                <p>Jefe de Producción y Posproductor. Participación en captura, rodaje y postproducción de contenido audiovisual para Instagram (Duración: 2 semanas).</p>
-                <span className="experience-tag">Prácticas</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -741,134 +777,8 @@ export default function Home() {
       <footer>
         <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos. Madrid, España.</p>
       </footer>
-
-      <script dangerouslySetInnerHTML={{__html: `
-        const carouselState = {
-          1: {
-            current: 0,
-            images: [
-              '/projects/graduacion-fp/img-1-opt.jpg',
-              '/projects/graduacion-fp/img-2-opt.jpg',
-              '/projects/graduacion-fp/img-3-opt.jpg',
-              '/projects/graduacion-fp/img-4-opt.jpg',
-              '/projects/graduacion-fp/img-5-opt.jpg'
-            ]
-          },
-          2: {
-            current: 0,
-            images: [
-              '/projects/concierto-gabriel-piattore/img-1-opt.jpg',
-              '/projects/concierto-gabriel-piattore/img-2-opt.jpg',
-              '/projects/concierto-gabriel-piattore/img-3-opt.jpg'
-            ]
-          },
-          3: {
-            current: 0,
-            images: [
-              '/projects/cortometraje-ser-buen-macarra/img-1-opt.jpg',
-              '/projects/cortometraje-ser-buen-macarra/img-2-opt.jpg',
-              '/projects/cortometraje-ser-buen-macarra/img-3-opt.jpg',
-              '/projects/cortometraje-ser-buen-macarra/img-4-opt.jpg'
-            ]
-          },
-          4: {
-            current: 0,
-            images: [
-              '/projects/fiesta-wav-azul/img-1-opt.jpg',
-              '/projects/fiesta-wav-azul/img-2-opt.jpg',
-              '/projects/fiesta-wav-azul/img-3-opt.jpg'
-            ]
-          },
-          5: {
-            current: 0,
-            images: [
-              '/projects/g-g-produccion-contenido/img-1-opt.jpg',
-              '/projects/g-g-produccion-contenido/img-2-opt.jpg',
-              '/projects/g-g-produccion-contenido/img-3-opt.jpg',
-              '/projects/g-g-produccion-contenido/img-4-opt.jpg'
-            ]
-          },
-          6: {
-            current: 0,
-            images: [
-              '/projects/serie-movistar-anatomia-instante/img-1-opt.jpg',
-              '/projects/serie-movistar-anatomia-instante/img-2-opt.jpg',
-              '/projects/serie-movistar-anatomia-instante/img-3-opt.jpg',
-              '/projects/serie-movistar-anatomia-instante/img-4-opt.jpg'
-            ]
-          },
-          7: {
-            current: 0,
-            images: [
-              '/projects/programa-radiofonica/img-1-opt.jpg',
-              '/projects/programa-radiofonica/img-2-opt.jpg',
-              '/projects/programa-radiofonica/img-3-opt.jpg'
-            ]
-          },
-          8: {
-            current: 0,
-            images: [
-              '/projects/atresmedia-radio/img-1-opt.jpg',
-              '/projects/atresmedia-radio/img-2-opt.jpg',
-              '/projects/atresmedia-radio/img-3-opt.jpg',
-              '/projects/atresmedia-radio/img-4-opt.jpg',
-              '/projects/atresmedia-radio/img-5-opt.jpg',
-              '/projects/atresmedia-radio/img-6-opt.jpg'
-            ]
-          },
-          9: {
-            current: 0,
-            images: [
-              '/projects/fe-2025-ongravity/img-1-opt.jpg',
-              '/projects/fe-2025-ongravity/img-2-opt.jpg',
-              '/projects/fe-2025-ongravity/img-3-opt.jpg',
-              '/projects/fe-2025-ongravity/img-4-opt.jpg'
-            ]
-          }
-        };
-
-        window.carouselNext = function(projectId) {
-          const state = carouselState[projectId];
-          if (!state) return;
-          state.current = (state.current + 1) % state.images.length;
-          window.updateCarousel(projectId);
-        }
-
-        window.carouselPrev = function(projectId) {
-          const state = carouselState[projectId];
-          if (!state) return;
-          state.current = (state.current - 1 + state.images.length) % state.images.length;
-          window.updateCarousel(projectId);
-        }
-
-        window.updateCarousel = function(projectId) {
-          const state = carouselState[projectId];
-          const img = document.getElementById('carousel-img-' + projectId);
-          const counter = document.getElementById('counter-' + projectId);
-          if (img && counter) {
-            img.src = state.images[state.current];
-            counter.textContent = state.current + 1;
-          }
-        }
-
-        // Scroll reveal animations
-        const observerOptions = {
-          threshold: 0.1,
-          rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-          observer.observe(el);
-        });
-      `}} />
     </>
   )
 }
+
+export default Home
