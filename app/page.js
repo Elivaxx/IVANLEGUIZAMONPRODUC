@@ -394,7 +394,10 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🎬</span>
+                  <img id="carousel-img-2" className="carousel-image" src="/projects/concierto-gabriel-piattore/img-1-opt.jpg" alt="Concierto Gabriel Piattore" />
+                  <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(2)}>‹</button>
+                  <button className="carousel-nav-btn next" onClick={() => window.carouselNext(2)}>›</button>
+                  <div className="carousel-counter"><span id="counter-2">1</span>/5</div>
                 </div>
                 <div className="project-info">
                   <h3>Concierto Gabriel Piattore</h3>
@@ -506,6 +509,16 @@ export default function Home() {
                 '/projects/graduacion-fp/img-3-opt.jpg',
                 '/projects/graduacion-fp/img-4-opt.jpg',
                 '/projects/graduacion-fp/img-5-opt.jpg'
+              ]
+            },
+            2: {
+              current: 0,
+              images: [
+                '/projects/concierto-gabriel-piattore/img-1-opt.jpg',
+                '/projects/concierto-gabriel-piattore/img-2-opt.jpg',
+                '/projects/concierto-gabriel-piattore/img-3-opt.jpg',
+                '/projects/concierto-gabriel-piattore/img-4-opt.jpg',
+                '/projects/concierto-gabriel-piattore/img-5-opt.jpg'
               ]
             }
           };
