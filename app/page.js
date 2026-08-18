@@ -7,7 +7,7 @@ export default function Home() {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Iván Leguizamón - Producción Audiovisual</title>
-        <style>{`
+        <style dangerouslySetInnerHTML={{__html: `
           * { margin: 0; padding: 0; box-sizing: border-box; }
           :root {
             --cream: #F5F1E8;
@@ -337,7 +337,7 @@ export default function Home() {
             .projects-grid { grid-template-columns: 1fr; }
             .carousel-container { height: 200px; }
           }
-        `}</style>
+        `}} />
       </head>
       <body>
         <nav>
@@ -495,7 +495,7 @@ export default function Home() {
           <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos.</p>
         </footer>
 
-        <script>{`
+        <script dangerouslySetInnerHTML={{__html: `
           // Carousel state (in-memory, no localStorage)
           const carouselState = {
             1: {
@@ -531,7 +531,7 @@ export default function Home() {
               counter.textContent = state.current + 1;
             }
           }
-        `}</script>
+        `}} />
       </body>
     </html>
   )
