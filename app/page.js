@@ -394,7 +394,7 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🎬</span>
+                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🎬</span>
                 </div>
                 <div className="project-info">
                   <h3>Concierto Gabriel Piattore</h3>
@@ -405,7 +405,7 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🎥</span>
+                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🎥</span>
                 </div>
                 <div className="project-info">
                   <h3>Cortometraje "Ser un buen macarra"</h3>
@@ -416,7 +416,7 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🎉</span>
+                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🎉</span>
                 </div>
                 <div className="project-info">
                   <h3>Fiesta WAV Azul</h3>
@@ -427,7 +427,7 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">📱</span>
+                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>📱</span>
                 </div>
                 <div className="project-info">
                   <h3>G&G - Producción Audiovisual</h3>
@@ -438,7 +438,7 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">📺</span>
+                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>📺</span>
                 </div>
                 <div className="project-info">
                   <h3>Serie Movistar+ "Anatomía de un Instante"</h3>
@@ -449,7 +449,7 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🎙️</span>
+                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🎙️</span>
                 </div>
                 <div className="project-info">
                   <h3>Programa Radiofónico "Radiografía"</h3>
@@ -460,7 +460,7 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🏢</span>
+                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🏢</span>
                 </div>
                 <div className="project-info">
                   <h3>Atresmedia Radio - Experiencia Corporativa</h3>
@@ -471,7 +471,7 @@ export default function Home() {
 
               <div className="project-card">
                 <div className="carousel-container">
-                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:60px;">🚀</span>
+                  <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🚀</span>
                 </div>
                 <div className="project-info">
                   <h3>FE 2025 - Ungravity</h3>
