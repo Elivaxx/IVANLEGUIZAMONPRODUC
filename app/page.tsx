@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, FC } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 
 interface CarouselState {
   [key: number]: {
@@ -777,6 +778,8 @@ const Home: FC = () => {
       <footer>
         <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos. Madrid, España.</p>
       </footer>
+
+      <Analytics />
     </>
   )
 }
