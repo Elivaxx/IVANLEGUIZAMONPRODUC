@@ -404,7 +404,10 @@ export default function Home() {
 
             <div className="project-card">
               <div className="carousel-container">
-                <span style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',fontSize:'60px'}}>🎉</span>
+                <img id="carousel-img-4" className="carousel-image" src="/projects/fiesta-wav-azul/img-1-opt.jpg" alt="Fiesta WAV Azul" />
+                <button className="carousel-nav-btn prev" onClick={() => window.carouselPrev(4)}>‹</button>
+                <button className="carousel-nav-btn next" onClick={() => window.carouselNext(4)}>›</button>
+                <div className="carousel-counter"><span id="counter-4">1</span>/3</div>
               </div>
               <div className="project-info">
                 <h3>Fiesta WAV Azul</h3>
@@ -510,6 +513,14 @@ export default function Home() {
               '/projects/cortometraje-ser-buen-macarra/img-2-opt.jpg',
               '/projects/cortometraje-ser-buen-macarra/img-3-opt.jpg',
               '/projects/cortometraje-ser-buen-macarra/img-4-opt.jpg'
+            ]
+          },
+          4: {
+            current: 0,
+            images: [
+              '/projects/fiesta-wav-azul/img-1-opt.jpg',
+              '/projects/fiesta-wav-azul/img-2-opt.jpg',
+              '/projects/fiesta-wav-azul/img-3-opt.jpg'
             ]
           }
         };
