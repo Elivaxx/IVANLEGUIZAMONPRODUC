@@ -59,7 +59,18 @@ export default function Home() {
       observer.observe(el)
     })
 
-    return () => observer.disconnect()
+    // Reactive background: gradient follows the pointer
+    const root = document.documentElement
+    const handlePointerMove = (e) => {
+      root.style.setProperty('--mx', `${e.clientX}px`)
+      root.style.setProperty('--my', `${e.clientY}px`)
+    }
+    window.addEventListener('pointermove', handlePointerMove)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('pointermove', handlePointerMove)
+    }
   }, [])
 
   const experiences = [
@@ -84,8 +95,21 @@ export default function Home() {
           --charcoal: #1a1a1a;
           --gray: #8a8a8a;
           --light-gray: #f0f0f0;
+          --mx: 50vw;
+          --my: 30vh;
         }
         html { scroll-behavior: smooth; }
+        .pointer-glow {
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+          background: radial-gradient(600px circle at var(--mx) var(--my), rgba(26, 77, 92, 0.08), transparent 70%);
+          transition: background 0.15s ease-out;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .pointer-glow { display: none; }
+        }
         body {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
           color: var(--charcoal);
@@ -622,18 +646,23 @@ export default function Home() {
         }
       `}</style>
 
-      <nav>
-        <div className="nav-container">
-          <div className="logo">IVÁN LEGUIZAMÓN • PRODUCTOR</div>
-          <ul className="nav-links">
-            <li><a href="#about">Sobre mí</a></li>
-            <li><a href="#reel">Reel</a></li>
-            <li><a href="#experiencias">Experiencias</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
-        </div>
-      </nav>
+      <div className="pointer-glow" aria-hidden="true" />
 
+      <header>
+        <nav aria-label="Navegación principal">
+          <div className="nav-container">
+            <div className="logo">IVÁN LEGUIZAMÓN • PRODUCTOR</div>
+            <ul className="nav-links">
+              <li><a href="#about">Sobre mí</a></li>
+              <li><a href="#reel">Reel</a></li>
+              <li><a href="#experiencias">Experiencias</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <main>
       <section className="hero" id="about">
         <div className="hero-content">
           <div className="hero-text scroll-reveal">
@@ -733,6 +762,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </main>
 
       <footer>
         <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos. Madrid, España.</p>
