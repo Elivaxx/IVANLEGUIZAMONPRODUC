@@ -23,9 +23,12 @@ export default function FluidBackground() {
       phase: Math.random() * Math.PI * 2,
     }))
 
+    // Render at half resolution (canvas buffer), scaled up via CSS — the blur
+    // hides the softness and it cuts per-frame pixel/blur cost by ~4x.
+    const SCALE = 0.5
     const resize = () => {
-      width = canvas.width = window.innerWidth
-      height = canvas.height = window.innerHeight
+      width = canvas.width = window.innerWidth * SCALE
+      height = canvas.height = window.innerHeight * SCALE
     }
     resize()
     window.addEventListener('resize', resize)
@@ -36,11 +39,23 @@ export default function FluidBackground() {
     }
     window.addEventListener('pointermove', handlePointerMove)
 
+    let paused = document.hidden
+    const handleVisibility = () => { paused = document.hidden }
+    document.addEventListener('visibilitychange', handleVisibility)
+
     let t = 0
-    const draw = () => {
+    let lastFrame = 0
+    const FRAME_INTERVAL = 1000 / 30 // cap at 30fps
+
+    const draw = (now) => {
+      raf = requestAnimationFrame(draw)
+      if (paused) return
+      if (now - lastFrame < FRAME_INTERVAL) return
+      lastFrame = now
+
       t += reduceMotion ? 0 : 0.004
       ctx.clearRect(0, 0, width, height)
-      ctx.filter = 'blur(60px)'
+      ctx.filter = 'blur(30px)'
 
       blobs.forEach((b, i) => {
         const pull = i === 0 ? 0.06 : 0.02
@@ -56,15 +71,14 @@ export default function FluidBackground() {
         ctx.arc(x, y, r, 0, Math.PI * 2)
         ctx.fill()
       })
-
-      raf = requestAnimationFrame(draw)
     }
-    draw()
+    raf = requestAnimationFrame(draw)
 
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
       window.removeEventListener('pointermove', handlePointerMove)
+      document.removeEventListener('visibilitychange', handleVisibility)
     }
   }, [])
 
