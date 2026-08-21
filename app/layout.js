@@ -1,4 +1,8 @@
+import { Fraunces, Space_Mono } from 'next/font/google'
 import './globals.css'
+
+const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces', display: 'swap' })
+const spaceMono = Space_Mono({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-space-mono', display: 'swap' })
 
 const siteUrl = 'https://ivanleguizamonproduc.vercel.app'
 
@@ -51,7 +55,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body>
+      <body className={`${fraunces.variable} ${spaceMono.variable}`}>
         {children}
       </body>
     </html>

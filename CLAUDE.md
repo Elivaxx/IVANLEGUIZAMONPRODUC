@@ -18,31 +18,44 @@ npm run lint         # Ejecuta ESLint en el proyecto
 
 ## Arquitectura General
 
-**Stack**: Next.js 16 (App Router) + React 19 + Tailwind CSS + Framer Motion + Supabase
+**Stack**: Next.js 16 (App Router) + React 19 + next/font (Fraunces + Space Mono) + canvas 2D para efectos
 
 ### Estructura de Directorios
 
 ```
 app/
-  ├── page.js              # Página principal (monolítica, ~700 líneas)
-  ├── layout.js            # Wrapper raíz con metadatos
-  ├── globals.css          # Estilos globales (mínimos)
-  └── components/          # Componentes reutilizables
-      ├── Navbar.jsx       # Navegación
-      ├── Hero.jsx         # Sección hero con Framer Motion
-      ├── Projects.jsx     # Galería de proyectos
-      ├── Services.jsx     # Servicios ofrecidos
-      └── Contact.jsx      # Formulario con Supabase
+  ├── page.js              # Página principal (composición de secciones + estilos)
+  ├── layout.js            # Metadata SEO, JSON-LD Person schema, fuentes
+  ├── globals.css          # Reset + Tailwind directives (paleta real vive en page.js)
+  ├── sitemap.js            # sitemap.xml nativo de Next.js
+  ├── robots.js              # robots.txt nativo de Next.js
+  └── components/
+      ├── CardNav.jsx        # Nav principal expandible (pill → card con links)
+      ├── BubbleMenu.jsx     # Burbujas flotantes de acción rápida (email/CV/contacto)
+      ├── FluidBackground.jsx # Fondo "ferrofluido" — metaballs en canvas 2D, azul
+      ├── FilmGrain.jsx      # Grano de cine animado (canvas noise, mix-blend-mode overlay)
+      ├── RevealText.jsx     # Título que se revela línea a línea al hacer scroll (blur-in)
+      ├── BentoSkills.jsx    # Grid bento de habilidades personales
+      └── DepthCarousel.jsx  # Carrusel de imágenes con perspectiva 3D
 
 public/                     # Assets estáticos
   ├── images/
   └── projects/            # Carpetas por proyecto (máx 6 imgs cada una)
 
-tailwind.config.js          # Configuración con paleta custom
-postcss.config.js           # Procesador CSS (requerido por Tailwind)
 vercel.json                 # Configuración deployment Vercel
-.env.local (git-ignored)    # Variables: NEXT_PUBLIC_SUPABASE_URL/ANON_KEY
+next.config.js              # Security headers (X-Frame-Options, etc.)
 ```
+
+### Paleta (dark, azul/negro/hueso)
+
+CSS variables en `page.js`: `--ivory` (#F5F1EA texto), `--blue` (#3B82F6 acento), `--deep`/`--navy` (fondo degradado). Tipografía: Fraunces (display, serif) vía `next/font/google`, Space Mono para labels/mayúsculas.
+
+### Efectos añadidos
+
+Todos vanilla (canvas 2D / CSS), sin librerías nuevas — mantiene el bundle ligero y no rompe el trabajo de SEO/performance:
+- `FluidBackground`: metaballs con gradientes radiales, sigue el puntero levemente. Ligero por diseño — real WebGL fue evaluado y descartado por coste de performance/SEO.
+- `FilmGrain`: noise en canvas 220×220 reescalado, opacity baja, `prefers-reduced-motion` lo desactiva.
+- `RevealText`: usa `IntersectionObserver` (mismo patrón que `.scroll-reveal`) para animar palabra por palabra; se resetea al salir de viewport.
 
 ### Patrón de la Página Principal (page.js)
 
