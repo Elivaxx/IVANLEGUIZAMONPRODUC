@@ -1,10 +1,10 @@
 'use client'
 
 const categories = [
-  { title: 'Bajo Presión', big: true, items: ['Búsqueda ágil de soluciones', 'Toma de decisiones rápida', 'Calma y compostura', 'Cautela y prevención'] },
-  { title: 'Software Producción', big: false, items: ['Premiere Pro (Avanzado)', 'After Effects (Avanzado)', 'DaVinci Resolve (Intermedio)'] },
-  { title: 'Profesionales', big: false, items: ['Puntualidad extrema', 'Disponibilidad flexible', 'Actitud colaborativa', 'Compromiso con calidad'] },
-  { title: 'Producción & IA', big: true, items: ['Gestión preproducción', 'Coordinación en rodaje', 'Generación de video con IA', 'Restauración & mejora'] },
+  { title: 'Producción', big: true, items: ['Bloqueo de localizaciones', 'Control de accesos en rodaje', 'Carga y descarga de equipo', 'Apoyo en oficina de producción', 'Gestión de permisos', 'Coordinación de equipos'] },
+  { title: 'Disponibilidad', big: false, items: ['Carnet B en vigor (manual y automático)', 'Tardes, fines de semana y por proyectos', 'Jornadas largas e irregulares'] },
+  { title: 'Idiomas y herramientas', big: false, items: ['Español (nativo)', 'Guaraní (nativo)', 'Inglés (B1)', 'Microsoft Office (básico)'] },
+  { title: 'Cualidades', big: true, items: ['Puntualidad', 'Trabajo en equipo', 'Calma bajo presión', 'Compromiso con el resultado'] },
 ]
 
 export default function BentoSkills() {

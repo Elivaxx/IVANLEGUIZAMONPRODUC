@@ -8,13 +8,13 @@ const siteUrl = 'https://ivanleguizamonproduc.vercel.app'
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Iván Leguizamón · Técnico en Producción Audiovisual — Madrid',
-  description: 'Técnico en Producción Audiovisual y Espectáculos en Madrid. Experiencia en rodajes de ficción, bloqueo de localizaciones y producción de contenido para TV, marca y eventos.',
-  keywords: ['producción audiovisual', 'técnico de producción', 'blocker rodaje', 'Madrid', 'Premiere Pro', 'After Effects'],
+  title: 'Iván Leguizamón · Auxiliar de producción y eventos — Madrid',
+  description: 'Técnico Superior en Producción Audiovisual y Espectáculos en Madrid. Experiencia en bloqueo de localizaciones, rodaje de ficción y producción de eventos deportivos. Carnet B.',
+  keywords: ['auxiliar de producción', 'runner', 'producción audiovisual', 'blocker rodaje', 'producción de eventos', 'Madrid'],
   authors: [{ name: 'Iván Elías Leguizamón Romero' }],
   openGraph: {
-    title: 'Iván Leguizamón · Técnico en Producción Audiovisual',
-    description: 'Experiencia real en rodajes de ficción, bloqueo de localizaciones y producción de contenido audiovisual en Madrid.',
+    title: 'Iván Leguizamón · Auxiliar de producción y eventos',
+    description: 'Bloqueo de localizaciones, rodaje de ficción y producción de eventos deportivos en Madrid.',
     url: siteUrl,
     siteName: 'Iván Leguizamón — Portfolio',
     locale: 'es_ES',
@@ -23,8 +23,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Iván Leguizamón · Técnico en Producción Audiovisual',
-    description: 'Experiencia real en rodajes de ficción, bloqueo de localizaciones y producción de contenido audiovisual en Madrid.',
+    title: 'Iván Leguizamón · Auxiliar de producción y eventos',
+    description: 'Bloqueo de localizaciones, rodaje de ficción y producción de eventos deportivos en Madrid.',
     images: ['/profile-photo.jpg'],
   },
   robots: { index: true, follow: true },
@@ -34,7 +34,7 @@ const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Iván Elías Leguizamón Romero',
-  jobTitle: 'Técnico en Producción Audiovisual y Espectáculos',
+  jobTitle: 'Auxiliar de producción audiovisual y eventos',
   url: siteUrl,
   image: `${siteUrl}/profile-photo.jpg`,
   email: 'mailto:elivaclips@gmail.com',
@@ -43,7 +43,7 @@ const personJsonLd = {
     { '@type': 'EducationalOrganization', name: 'Planeta FP' },
     { '@type': 'EducationalOrganization', name: 'IPAC — Instituto de Comunicación, Arte y Ciencias' },
   ],
-  knowsAbout: ['Producción Audiovisual', 'Adobe Premiere Pro', 'Adobe After Effects', 'DaVinci Resolve'],
+  knowsAbout: ['Producción audiovisual', 'Bloqueo de localizaciones', 'Producción de eventos', 'Rodaje de ficción'],
 }
 
 export default function RootLayout({ children }) {

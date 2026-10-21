@@ -4,8 +4,7 @@ import { useState } from 'react'
 
 const links = [
   { href: '#about', label: 'Sobre mí', desc: 'Perfil y habilidades' },
-  { href: '#reel', label: 'Reel', desc: 'Muestra audiovisual' },
-  { href: '#experiencias', label: 'Experiencias', desc: '9 proyectos documentados' },
+  { href: '#experiencias', label: 'Experiencias', desc: 'Rodajes, eventos y formación' },
   { href: '#contacto', label: 'Contacto', desc: 'Hablemos de tu proyecto' },
 ]
 

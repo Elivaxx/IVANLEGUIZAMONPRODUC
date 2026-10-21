@@ -22,15 +22,15 @@ export default function Home() {
   }, [])
 
   const experiences = [
-    { id: 1, title: 'Graduación Planeta FP', description: 'Ciclo Superior de Producción Audiovisual y su Producción para TV y Eventos. Coordinación de equipo técnico, captura y edición de contenido audiovisual.', tag: 'Evento', folderName: 'graduacion-fp', imageCount: 5 },
-    { id: 2, title: 'Concierto Gabriel Piattore', description: 'Director de Cámara en concierto musical en vivo. Dirección de ángulos de cámara, movimientos de realización y gestión técnica en rodaje.', tag: 'Música', folderName: 'concierto-gabriel-piattore', imageCount: 3 },
-    { id: 3, title: 'Cortometraje "Ser un buen macarra"', description: 'Jefe de Producción en rodaje de ficción. Coordinación de equipos, gestión de localizaciones y seguimiento de producción en set.', tag: 'Ficción', folderName: 'cortometraje-ser-buen-macarra', imageCount: 4 },
-    { id: 4, title: 'Fiesta WAV Azul', description: 'Producción audiovisual de espectáculo y marketing. Edición de contenido y promoción digital para amplificación en redes.', tag: 'Espectáculo', folderName: 'fiesta-wav-azul', imageCount: 3 },
-    { id: 5, title: 'G&G - Producción Audiovisual', description: 'Jefe de Producción de contenido audiovisual para marketing. Gestión integral de producción y coordinación en eventos deportivos y entretenimiento.', tag: 'Ocio y Deporte', folderName: 'g-g-produccion-contenido', imageCount: 4 },
-    { id: 6, title: 'Serie Movistar+ "Anatomía de un Instante"', description: 'Blocker en 5 rodajes a través de Pase Producciones. Bloqueo de localizaciones y coordinación integral en serie de ficción televisiva.', tag: 'Ficción', folderName: 'serie-movistar-anatomia-instante', imageCount: 4 },
-    { id: 7, title: 'Programa Radiofónico "Radiografía"', description: 'Productor Audiovisual en proyecto radiofónico. Gestión técnica de producción, producción de contenido y coordinación de emisión.', tag: 'Radio', folderName: 'programa-radiofonica', imageCount: 3 },
-    { id: 8, title: 'Atresmedia - Experiencia Corporativa', description: 'Coordinación de producción en visitas a instalaciones corporativas. Experiencia en entorno corporativo de medios y radiodifusión.', tag: 'Corporativo', folderName: 'atresmedia-radio', imageCount: 6 },
-    { id: 9, title: 'FE 2025 - Ongravity', description: 'Jefe de Producción y Posproductor. Participación en captura, rodaje y postproducción de contenido audiovisual para Instagram (Duración: 2 semanas).', tag: 'Prácticas', folderName: 'fe-2025-ongravity', imageCount: 4 }
+    { id: 1, title: 'Graduación Planeta FP', description: 'Evento de graduación del Ciclo Superior de Producción Audiovisual y Espectáculos en Planeta FP.', tag: 'Evento', folderName: 'graduacion-fp', imageCount: 5 },
+    { id: 2, title: 'Concierto', description: 'Concierto en directo realizado dentro del ciclo formativo en Planeta FP. Trabajo en equipo en producción y rodaje.', tag: 'Música', folderName: 'concierto-gabriel-piattore', imageCount: 3 },
+    { id: 3, title: 'Cortometraje de fin de ciclo', description: 'Ayudante de producción. Coordinación de la producción del cortometraje: gestión de agenda, permisos y equipo.', tag: 'Ficción', folderName: 'cortometraje-ser-buen-macarra', imageCount: 4 },
+    { id: 4, title: 'Fiesta WAV Azul', description: 'Producción audiovisual de un espectáculo: apoyo en la organización y en la cobertura del evento.', tag: 'Espectáculo', folderName: 'fiesta-wav-azul', imageCount: 3 },
+    { id: 5, title: 'Give and Go Sport', description: 'Apoyo de producción en eventos y campañas de producción audiovisual: organización y logística en eventos y campus deportivos. Contrato a media jornada (20 h semanales).', tag: 'Deporte', folderName: 'g-g-produccion-contenido', imageCount: 4 },
+    { id: 6, title: 'Rodaje de ficción', description: 'Blocker y apoyo de producción con Pase Crew. Control de accesos y bloqueo de localizaciones, coordinación con producción y carga y descarga de material en el cierre de rodaje.', tag: 'Ficción', folderName: 'serie-movistar-anatomia-instante', imageCount: 4 },
+    { id: 7, title: 'Programa de radio', description: 'Proyecto de radio realizado en el ciclo formativo. Apoyo en la producción y la emisión.', tag: 'Radio', folderName: 'programa-radiofonica', imageCount: 3 },
+    { id: 8, title: 'Visita a Atresmedia', description: 'Visita a instalaciones de medios y radiodifusión con el ciclo formativo.', tag: 'Formación', folderName: 'atresmedia-radio', imageCount: 6 },
+    { id: 9, title: 'Ungravity', description: 'Proyecto formativo de Planeta FP. Ayudante de producción y cámara en rodajes de contenido de marca.', tag: 'Prácticas', folderName: 'fe-2025-ongravity', imageCount: 4 }
   ]
 
   return (
@@ -309,26 +309,6 @@ export default function Home() {
           .bento-cell-wide { grid-column: span 2; }
         }
 
-        /* Reel */
-        .reel-section { padding: 6rem 2rem; position: relative; }
-        .reel-container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-        .reel-title { margin-bottom: 3rem; color: var(--ivory); font-weight: 600; letter-spacing: -1px; text-align: center; font-size: 2.8rem; }
-        .reel-placeholder {
-          width: 100%;
-          height: 600px;
-          background: linear-gradient(135deg, var(--navy) 0%, var(--deep) 100%);
-          border: 1px solid rgba(59, 130, 246, 0.25);
-          border-radius: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--ivory);
-          font-size: 1.5rem;
-          text-align: center;
-          font-weight: 500;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
         /* Experiences */
         .experiences { padding: 6rem 2rem; position: relative; }
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
@@ -487,8 +467,6 @@ export default function Home() {
           .contact h2 { font-size: 1.8rem; }
           .contact-buttons { flex-direction: column; gap: 1rem; }
           .contact-link, .cv-link { width: 100%; }
-          .reel-title { font-size: 1.8rem; }
-          .reel-placeholder { height: 300px; }
           .bubble-menu { bottom: 1.25rem; right: 1.25rem; }
         }
       `}</style>
@@ -504,9 +482,9 @@ export default function Home() {
         <section className="hero" id="about">
           <div className="hero-content">
             <div className="hero-text scroll-reveal">
-              <h1>Técnico en Producción Audiovisual</h1>
-              <p className="hero-subtitle">Madrid, España</p>
-              <p>Especializado en producción audiovisual y espectáculos con experiencia integral en rodajes de ficción, producciones televisivas y gestión de localizaciones. Egresado del Ciclo Superior de Producción Audiovisual y Espectáculos con expertise avanzado en preproducción, rodaje y postproducción.</p>
+              <h1>Auxiliar de producción audiovisual y eventos</h1>
+              <p className="hero-subtitle">Madrid, España · Carnet B</p>
+              <p>Técnico Superior en Producción Audiovisual y Espectáculos (Planeta FP, finalizado en junio de 2026). Experiencia en bloqueo de localizaciones y cierre de rodaje en ficción, y en apoyo a la producción de eventos y campañas deportivas. Busco incorporarme como auxiliar de producción o runner en rodajes y eventos. Disponible tardes, fines de semana y por proyectos.</p>
 
               <div className="skills-section">
                 <p className="skills-label">Habilidades Personales</p>
@@ -516,16 +494,6 @@ export default function Home() {
 
             <div className="hero-image scroll-reveal">
               <img src="/profile-photo.jpg" alt="Iván Leguizamón" />
-            </div>
-          </div>
-        </section>
-
-        <section className="reel-section" id="reel">
-          <div className="reel-container">
-            <RevealText as="h2" className="reel-title" text="Mi Reel Audiovisual" />
-            <div className="reel-placeholder">
-              📹 Agrega aquí tu Vimeo/YouTube reel<br/>
-              <span style={{fontSize: '0.9rem', marginTop: '1rem', opacity: 0.8}}>Cambiar URL: src=&quot;https://vimeo.com/TU_VIDEO_ID&quot;</span>
             </div>
           </div>
         </section>
@@ -554,7 +522,7 @@ export default function Home() {
         <section className="contact" id="contacto">
           <div className="contact-content scroll-reveal">
             <h2>Conectemos</h2>
-            <p>¿Tienes un proyecto audiovisual en mente? Escríbeme para hablar sobre nuevas oportunidades de colaboración en producción, postproducción o espectáculos.</p>
+            <p>¿Buscas apoyo de producción en un rodaje o un evento? Escríbeme: estoy disponible tardes, fines de semana y por proyectos.</p>
             <div className="contact-buttons">
               <a href="mailto:elivaclips@gmail.com" className="contact-link specular-btn">ENVIAR EMAIL</a>
               <a href="/CV_Ivan_Leguizamon.pdf" download className="cv-link specular-btn">DESCARGAR CV</a>
@@ -566,7 +534,7 @@ export default function Home() {
       <BubbleMenu />
 
       <footer>
-        <p>&copy; 2025 Iván Leguizamón. Técnico en Producción Audiovisual y Espectáculos. Madrid, España.</p>
+        <p>&copy; 2026 Iván Leguizamón. Técnico Superior en Producción Audiovisual y Espectáculos. Madrid, España.</p>
       </footer>
     </>
   )
