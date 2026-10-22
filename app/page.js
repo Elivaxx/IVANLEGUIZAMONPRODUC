@@ -33,6 +33,14 @@ export default function Home() {
     { id: 9, title: 'Ungravity', description: 'Proyecto formativo de Planeta FP. Ayudante de producción y cámara en rodajes de contenido de marca.', tag: 'Prácticas', folderName: 'fe-2025-ongravity', imageCount: 4 }
   ]
 
+  // Trabajos primero, luego proyectos y estudios; lo más fuerte arriba de cada bloque.
+  const byId = Object.fromEntries(experiences.map((e) => [e.id, e]))
+  const groups = [
+    { title: 'Trabajos', ids: [6, 5] },
+    { title: 'Proyectos', ids: [3, 9, 2, 7, 4] },
+    { title: 'Estudios', ids: [1, 8] },
+  ]
+
   return (
     <>
       <style>{`
@@ -313,6 +321,8 @@ export default function Home() {
         .experiences { padding: 6rem 2rem; position: relative; }
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
         .section-title { margin-bottom: 4rem; color: var(--ivory); font-weight: 600; letter-spacing: -1px; font-size: 2.8rem; }
+        .experience-group { margin-bottom: 4rem; }
+        .group-title { font-family: var(--font-space-mono), 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--blue); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(59, 130, 246, 0.2); }
         .experiences-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 3rem; }
         .experience-card {
           background: rgba(59, 130, 246, 0.05);
@@ -500,22 +510,30 @@ export default function Home() {
 
         <section className="experiences" id="experiencias">
           <div className="container">
-            <RevealText as="h2" className="section-title" text="Experiencias" />
-            <div className="experiences-grid">
-              {experiences.map((exp) => (
-                <div key={exp.id} className="experience-card">
-                  <DepthCarousel
-                    images={Array.from({ length: exp.imageCount }, (_, i) => `/projects/${exp.folderName}/img-${i + 1}-opt.jpg`)}
-                    alt={exp.title}
-                  />
-                  <div className="experience-info">
-                    <h3>{exp.title}</h3>
-                    <p>{exp.description}</p>
-                    <span className="experience-tag">{exp.tag}</span>
-                  </div>
+            <RevealText as="h2" className="section-title" text="Experiencia" />
+            {groups.map((g) => (
+              <div key={g.title} className="experience-group">
+                <h3 className="group-title">{g.title}</h3>
+                <div className="experiences-grid">
+                  {g.ids.map((id) => {
+                    const exp = byId[id]
+                    return (
+                      <div key={exp.id} className="experience-card">
+                        <DepthCarousel
+                          images={Array.from({ length: exp.imageCount }, (_, i) => `/projects/${exp.folderName}/img-${i + 1}-opt.jpg`)}
+                          alt={exp.title}
+                        />
+                        <div className="experience-info">
+                          <h3>{exp.title}</h3>
+                          <p>{exp.description}</p>
+                          <span className="experience-tag">{exp.tag}</span>
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </section>
 
